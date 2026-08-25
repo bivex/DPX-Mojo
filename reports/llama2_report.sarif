@@ -1,0 +1,1177 @@
+{
+  "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "DPX-Mojo",
+          "informationUri": "https://github.com/bivex/DPX-Mojo",
+          "version": "0.1.0"
+        }
+      },
+      "results": [
+        {
+          "ruleId": "explicit_ownership_borrow",
+          "level": "note",
+          "message": {
+            "text": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 150,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "explicit_ownership_borrow",
+          "level": "note",
+          "message": {
+            "text": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 153,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "explicit_ownership_borrow",
+          "level": "note",
+          "message": {
+            "text": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 386,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "explicit_ownership_borrow",
+          "level": "note",
+          "message": {
+            "text": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 390,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "explicit_ownership_borrow",
+          "level": "note",
+          "message": {
+            "text": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 459,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "explicit_ownership_borrow",
+          "level": "note",
+          "message": {
+            "text": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 470,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "explicit_ownership_borrow",
+          "level": "note",
+          "message": {
+            "text": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 664,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "explicit_ownership_borrow",
+          "level": "note",
+          "message": {
+            "text": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 673,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "explicit_ownership_borrow",
+          "level": "note",
+          "message": {
+            "text": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 682,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "explicit_ownership_borrow",
+          "level": "note",
+          "message": {
+            "text": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 25,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "explicit_ownership_borrow",
+          "level": "note",
+          "message": {
+            "text": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 34,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "explicit_ownership_borrow",
+          "level": "note",
+          "message": {
+            "text": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 42,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "explicit_ownership_borrow",
+          "level": "note",
+          "message": {
+            "text": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 78,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "explicit_ownership_borrow",
+          "level": "note",
+          "message": {
+            "text": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 83,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "explicit_ownership_borrow",
+          "level": "note",
+          "message": {
+            "text": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 90,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "explicit_ownership_borrow",
+          "level": "note",
+          "message": {
+            "text": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 94,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "explicit_ownership_borrow",
+          "level": "note",
+          "message": {
+            "text": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 118,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "explicit_ownership_borrow",
+          "level": "note",
+          "message": {
+            "text": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 173,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "explicit_ownership_borrow",
+          "level": "note",
+          "message": {
+            "text": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 231,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "explicit_ownership_borrow",
+          "level": "note",
+          "message": {
+            "text": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 270,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "explicit_ownership_borrow",
+          "level": "note",
+          "message": {
+            "text": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 300,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "explicit_ownership_borrow",
+          "level": "note",
+          "message": {
+            "text": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 480,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "transfer_move_operator",
+          "level": "note",
+          "message": {
+            "text": "Explicit ownership transfer utilizing the '^' move operator without deep cloning."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 682,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "transfer_move_operator",
+          "level": "note",
+          "message": {
+            "text": "Explicit ownership transfer utilizing the '^' move operator without deep cloning."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/tests/test-llama2.mojo"
+                },
+                "region": {
+                  "startLine": 145,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "transfer_move_operator",
+          "level": "note",
+          "message": {
+            "text": "Explicit ownership transfer utilizing the '^' move operator without deep cloning."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/tests/test-llama2.mojo"
+                },
+                "region": {
+                  "startLine": 365,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "transfer_move_operator",
+          "level": "note",
+          "message": {
+            "text": "Explicit ownership transfer utilizing the '^' move operator without deep cloning."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 42,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "transfer_move_operator",
+          "level": "note",
+          "message": {
+            "text": "Explicit ownership transfer utilizing the '^' move operator without deep cloning."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 308,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "simd_vectorization_kernel",
+          "level": "note",
+          "message": {
+            "text": "SIMD hardware vector registers (AVX-512, ARM Neon) performing multi-element parallel operations."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 390,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "simd_vectorization_kernel",
+          "level": "note",
+          "message": {
+            "text": "SIMD hardware vector registers (AVX-512, ARM Neon) performing multi-element parallel operations."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 432,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "simd_vectorization_kernel",
+          "level": "note",
+          "message": {
+            "text": "SIMD hardware vector registers (AVX-512, ARM Neon) performing multi-element parallel operations."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 470,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "simd_vectorization_kernel",
+          "level": "note",
+          "message": {
+            "text": "SIMD hardware vector registers (AVX-512, ARM Neon) performing multi-element parallel operations."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 177,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "simd_vectorization_kernel",
+          "level": "note",
+          "message": {
+            "text": "SIMD hardware vector registers (AVX-512, ARM Neon) performing multi-element parallel operations."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 590,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "parallelize_multi_core",
+          "level": "note",
+          "message": {
+            "text": "Multi-core task distribution using 'parallelize' and thread pools."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 494,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "parallelize_multi_core",
+          "level": "note",
+          "message": {
+            "text": "Multi-core task distribution using 'parallelize' and thread pools."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 590,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "comptime_parameter_specialization",
+          "level": "note",
+          "message": {
+            "text": "Compile-time parameters ('[type: DType, width: Int]') generating specialized machine code."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 177,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "singleton_global_instance",
+          "level": "note",
+          "message": {
+            "text": "Unique global instance or static coordinator struct."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 218,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "singleton_global_instance",
+          "level": "note",
+          "message": {
+            "text": "Unique global instance or static coordinator struct."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 258,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "facade_unified_api",
+          "level": "note",
+          "message": {
+            "text": "Unified top-level API struct coordinating multiple subsystem components."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 20,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "facade_unified_api",
+          "level": "note",
+          "message": {
+            "text": "Unified top-level API struct coordinating multiple subsystem components."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 166,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "scalar_compute_loop",
+          "level": "error",
+          "message": {
+            "text": "Element-by-element scalar loop in numerical algorithm instead of SIMD vectorization."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/tests/test-matmul.mojo"
+                },
+                "region": {
+                  "startLine": 53,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "scalar_compute_loop",
+          "level": "error",
+          "message": {
+            "text": "Element-by-element scalar loop in numerical algorithm instead of SIMD vectorization."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/tests/test-matmul.mojo"
+                },
+                "region": {
+                  "startLine": 82,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "scalar_compute_loop",
+          "level": "error",
+          "message": {
+            "text": "Element-by-element scalar loop in numerical algorithm instead of SIMD vectorization."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/tests/test-matmul.mojo"
+                },
+                "region": {
+                  "startLine": 116,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "scalar_compute_loop",
+          "level": "error",
+          "message": {
+            "text": "Element-by-element scalar loop in numerical algorithm instead of SIMD vectorization."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/tests/test-matmul.mojo"
+                },
+                "region": {
+                  "startLine": 145,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "scalar_compute_loop",
+          "level": "error",
+          "message": {
+            "text": "Element-by-element scalar loop in numerical algorithm instead of SIMD vectorization."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/tests/test-matmul.mojo"
+                },
+                "region": {
+                  "startLine": 177,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "scalar_compute_loop",
+          "level": "error",
+          "message": {
+            "text": "Element-by-element scalar loop in numerical algorithm instead of SIMD vectorization."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/tests/test-matmul.mojo"
+                },
+                "region": {
+                  "startLine": 223,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "scalar_compute_loop",
+          "level": "error",
+          "message": {
+            "text": "Element-by-element scalar loop in numerical algorithm instead of SIMD vectorization."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/tests/test-matmul.mojo"
+                },
+                "region": {
+                  "startLine": 279,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "scalar_compute_loop",
+          "level": "error",
+          "message": {
+            "text": "Element-by-element scalar loop in numerical algorithm instead of SIMD vectorization."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/tests/test-matmul.mojo"
+                },
+                "region": {
+                  "startLine": 312,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "monolithic_struct_srp",
+          "level": "error",
+          "message": {
+            "text": "Struct declaring excessive fields or methods, violating SRP."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 20,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "monolithic_struct_srp",
+          "level": "error",
+          "message": {
+            "text": "Struct declaring excessive fields or methods, violating SRP."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 218,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "monolithic_struct_srp",
+          "level": "error",
+          "message": {
+            "text": "Struct declaring excessive fields or methods, violating SRP."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 284,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "monolithic_struct_srp",
+          "level": "error",
+          "message": {
+            "text": "Struct declaring excessive fields or methods, violating SRP."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 477,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "kiss_cyclomatic_complexity",
+          "level": "error",
+          "message": {
+            "text": "Function containing excessive decision branch points (> 8)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 682,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "kiss_cyclomatic_complexity",
+          "level": "error",
+          "message": {
+            "text": "Function containing excessive decision branch points (> 8)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 715,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "kiss_cyclomatic_complexity",
+          "level": "error",
+          "message": {
+            "text": "Function containing excessive decision branch points (> 8)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 766,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "kiss_cyclomatic_complexity",
+          "level": "error",
+          "message": {
+            "text": "Function containing excessive decision branch points (> 8)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/tests/test-transformer.mojo"
+                },
+                "region": {
+                  "startLine": 27,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "kiss_long_parameter_list",
+          "level": "error",
+          "message": {
+            "text": "Function accepting >= 6 positional parameters."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo"
+                },
+                "region": {
+                  "startLine": 459,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "dry_duplicate_logic",
+          "level": "error",
+          "message": {
+            "text": "Duplicated algorithmic sequences across multiple functions."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "unknown"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "dry_duplicate_logic",
+          "level": "error",
+          "message": {
+            "text": "Duplicated algorithmic sequences across multiple functions."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "unknown"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

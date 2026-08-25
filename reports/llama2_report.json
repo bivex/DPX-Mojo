@@ -1,0 +1,1294 @@
+{
+  "project_path": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo",
+  "scanned_files_count": 6,
+  "total_detections_count": 58,
+  "elapsed_seconds": 0.0102,
+  "summary_by_category": {
+    "mojo_idiomatic": 27,
+    "simd_hardware_acceleration": 7,
+    "comptime_metaprogramming": 1,
+    "creational": 2,
+    "structural": 2,
+    "behavioral": 0,
+    "resilience": 8,
+    "principle": 11
+  },
+  "detections": [
+    {
+      "pattern_type": "explicit_ownership_borrow",
+      "category": "mojo_idiomatic",
+      "target_name": "str_concat",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.9,
+        "percentage": "90%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:150:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "MOJO_EXPLICIT_OWNERSHIP",
+          "description": "Function 'str_concat' enforces explicit memory conventions (a: borrowed, b: borrowed)",
+          "weight": 0.9,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:150:1"
+        }
+      ],
+      "summary": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+    },
+    {
+      "pattern_type": "explicit_ownership_borrow",
+      "category": "mojo_idiomatic",
+      "target_name": "string_compare",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.9,
+        "percentage": "90%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:153:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "MOJO_EXPLICIT_OWNERSHIP",
+          "description": "Function 'string_compare' enforces explicit memory conventions (a: borrowed, b: borrowed)",
+          "weight": 0.9,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:153:1"
+        }
+      ],
+      "summary": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+    },
+    {
+      "pattern_type": "explicit_ownership_borrow",
+      "category": "mojo_idiomatic",
+      "target_name": "softmax",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.9,
+        "percentage": "90%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:386:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "MOJO_EXPLICIT_OWNERSHIP",
+          "description": "Function 'softmax' enforces explicit memory conventions (mut x: borrowed, size: borrowed)",
+          "weight": 0.9,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:386:1"
+        }
+      ],
+      "summary": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+    },
+    {
+      "pattern_type": "explicit_ownership_borrow",
+      "category": "mojo_idiomatic",
+      "target_name": "softmax",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.9,
+        "percentage": "90%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:390:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "MOJO_EXPLICIT_OWNERSHIP",
+          "description": "Function 'softmax' enforces explicit memory conventions (mut x: borrowed, start: borrowed, end: borrowed)",
+          "weight": 0.9,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:390:1"
+        }
+      ],
+      "summary": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+    },
+    {
+      "pattern_type": "explicit_ownership_borrow",
+      "category": "mojo_idiomatic",
+      "target_name": "matmul",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.9,
+        "percentage": "90%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:459:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "MOJO_EXPLICIT_OWNERSHIP",
+          "description": "Function 'matmul' enforces explicit memory conventions (C: borrowed, A: borrowed, B: borrowed)",
+          "weight": 0.9,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:459:1"
+        }
+      ],
+      "summary": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+    },
+    {
+      "pattern_type": "explicit_ownership_borrow",
+      "category": "mojo_idiomatic",
+      "target_name": "add",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.9,
+        "percentage": "90%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:470:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "MOJO_EXPLICIT_OWNERSHIP",
+          "description": "Function 'add' enforces explicit memory conventions (dest: borrowed, src: borrowed, size: borrowed)",
+          "weight": 0.9,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:470:1"
+        }
+      ],
+      "summary": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+    },
+    {
+      "pattern_type": "explicit_ownership_borrow",
+      "category": "mojo_idiomatic",
+      "target_name": "argmax",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.9,
+        "percentage": "90%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:664:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "MOJO_EXPLICIT_OWNERSHIP",
+          "description": "Function 'argmax' enforces explicit memory conventions (v: borrowed, size: borrowed)",
+          "weight": 0.9,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:664:1"
+        }
+      ],
+      "summary": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+    },
+    {
+      "pattern_type": "explicit_ownership_borrow",
+      "category": "mojo_idiomatic",
+      "target_name": "sample",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.9,
+        "percentage": "90%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:673:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "MOJO_EXPLICIT_OWNERSHIP",
+          "description": "Function 'sample' enforces explicit memory conventions (probabilities: borrowed, size: borrowed)",
+          "weight": 0.9,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:673:1"
+        }
+      ],
+      "summary": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+    },
+    {
+      "pattern_type": "explicit_ownership_borrow",
+      "category": "mojo_idiomatic",
+      "target_name": "bpe_encode",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.9,
+        "percentage": "90%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:682:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "MOJO_EXPLICIT_OWNERSHIP",
+          "description": "Function 'bpe_encode' enforces explicit memory conventions (mut tokens: borrowed, text: borrowed, tok: borrowed)",
+          "weight": 0.9,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:682:1"
+        }
+      ],
+      "summary": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+    },
+    {
+      "pattern_type": "explicit_ownership_borrow",
+      "category": "mojo_idiomatic",
+      "target_name": "__init__",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.9,
+        "percentage": "90%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:25:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "MOJO_EXPLICIT_OWNERSHIP",
+          "description": "Function '__init__' enforces explicit memory conventions (out self: borrowed, *dims: borrowed)",
+          "weight": 0.9,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:25:1"
+        }
+      ],
+      "summary": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+    },
+    {
+      "pattern_type": "explicit_ownership_borrow",
+      "category": "mojo_idiomatic",
+      "target_name": "__init__",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.9,
+        "percentage": "90%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:34:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "MOJO_EXPLICIT_OWNERSHIP",
+          "description": "Function '__init__' enforces explicit memory conventions (out self: borrowed, ptr: borrowed, *dims: borrowed)",
+          "weight": 0.9,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:34:1"
+        }
+      ],
+      "summary": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+    },
+    {
+      "pattern_type": "explicit_ownership_borrow",
+      "category": "mojo_idiomatic",
+      "target_name": "__init__",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.9,
+        "percentage": "90%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:42:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "MOJO_EXPLICIT_OWNERSHIP",
+          "description": "Function '__init__' enforces explicit memory conventions (out self: borrowed, ptr: borrowed)",
+          "weight": 0.9,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:42:1"
+        }
+      ],
+      "summary": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+    },
+    {
+      "pattern_type": "explicit_ownership_borrow",
+      "category": "mojo_idiomatic",
+      "target_name": "__getitem__",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.9,
+        "percentage": "90%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:78:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "MOJO_EXPLICIT_OWNERSHIP",
+          "description": "Function '__getitem__' enforces explicit memory conventions (y: borrowed, x: borrowed)",
+          "weight": 0.9,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:78:1"
+        }
+      ],
+      "summary": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+    },
+    {
+      "pattern_type": "explicit_ownership_borrow",
+      "category": "mojo_idiomatic",
+      "target_name": "__getitem__",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.9,
+        "percentage": "90%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:83:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "MOJO_EXPLICIT_OWNERSHIP",
+          "description": "Function '__getitem__' enforces explicit memory conventions (z: borrowed, y: borrowed, x: borrowed)",
+          "weight": 0.9,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:83:1"
+        }
+      ],
+      "summary": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+    },
+    {
+      "pattern_type": "explicit_ownership_borrow",
+      "category": "mojo_idiomatic",
+      "target_name": "__setitem__",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.9,
+        "percentage": "90%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:90:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "MOJO_EXPLICIT_OWNERSHIP",
+          "description": "Function '__setitem__' enforces explicit memory conventions (x: borrowed, val: borrowed)",
+          "weight": 0.9,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:90:1"
+        }
+      ],
+      "summary": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+    },
+    {
+      "pattern_type": "explicit_ownership_borrow",
+      "category": "mojo_idiomatic",
+      "target_name": "__setitem__",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.9,
+        "percentage": "90%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:94:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "MOJO_EXPLICIT_OWNERSHIP",
+          "description": "Function '__setitem__' enforces explicit memory conventions (y: borrowed, x: borrowed, val: borrowed)",
+          "weight": 0.9,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:94:1"
+        }
+      ],
+      "summary": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+    },
+    {
+      "pattern_type": "explicit_ownership_borrow",
+      "category": "mojo_idiomatic",
+      "target_name": "slice",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.9,
+        "percentage": "90%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:118:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "MOJO_EXPLICIT_OWNERSHIP",
+          "description": "Function 'slice' enforces explicit memory conventions (idx1: borrowed, idx2: borrowed)",
+          "weight": 0.9,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:118:1"
+        }
+      ],
+      "summary": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+    },
+    {
+      "pattern_type": "explicit_ownership_borrow",
+      "category": "mojo_idiomatic",
+      "target_name": "__init__",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.9,
+        "percentage": "90%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:173:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "MOJO_EXPLICIT_OWNERSHIP",
+          "description": "Function '__init__' enforces explicit memory conventions (out self: borrowed, vocab_size: borrowed, filename: borrowed)",
+          "weight": 0.9,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:173:1"
+        }
+      ],
+      "summary": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+    },
+    {
+      "pattern_type": "explicit_ownership_borrow",
+      "category": "mojo_idiomatic",
+      "target_name": "__init__",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.9,
+        "percentage": "90%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:231:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "MOJO_EXPLICIT_OWNERSHIP",
+          "description": "Function '__init__' enforces explicit memory conventions (out self: borrowed, filename: borrowed, print_config: borrowed)",
+          "weight": 0.9,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:231:1"
+        }
+      ],
+      "summary": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+    },
+    {
+      "pattern_type": "explicit_ownership_borrow",
+      "category": "mojo_idiomatic",
+      "target_name": "__init__",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.9,
+        "percentage": "90%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:270:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "MOJO_EXPLICIT_OWNERSHIP",
+          "description": "Function '__init__' enforces explicit memory conventions (out self: borrowed, config: borrowed)",
+          "weight": 0.9,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:270:1"
+        }
+      ],
+      "summary": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+    },
+    {
+      "pattern_type": "explicit_ownership_borrow",
+      "category": "mojo_idiomatic",
+      "target_name": "__init__",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.9,
+        "percentage": "90%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:300:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "MOJO_EXPLICIT_OWNERSHIP",
+          "description": "Function '__init__' enforces explicit memory conventions (out self: borrowed, file_name: borrowed, config: borrowed)",
+          "weight": 0.9,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:300:1"
+        }
+      ],
+      "summary": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+    },
+    {
+      "pattern_type": "explicit_ownership_borrow",
+      "category": "mojo_idiomatic",
+      "target_name": "__init__",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.9,
+        "percentage": "90%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:480:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "MOJO_EXPLICIT_OWNERSHIP",
+          "description": "Function '__init__' enforces explicit memory conventions (out self: borrowed, workers: borrowed)",
+          "weight": 0.9,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:480:1"
+        }
+      ],
+      "summary": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+    },
+    {
+      "pattern_type": "transfer_move_operator",
+      "category": "mojo_idiomatic",
+      "target_name": "bpe_encode",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.92,
+        "percentage": "92%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:682:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "MOJO_TRANSFER_MOVE_OPERATOR",
+          "description": "Function 'bpe_encode' uses '^' transfer operator to move ownership without memory copying",
+          "weight": 0.92,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:682:1"
+        }
+      ],
+      "summary": "Explicit ownership transfer utilizing the '^' move operator without deep cloning."
+    },
+    {
+      "pattern_type": "transfer_move_operator",
+      "category": "mojo_idiomatic",
+      "target_name": "test_string_from_bytes",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.92,
+        "percentage": "92%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/tests/test-llama2.mojo:145:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "MOJO_TRANSFER_MOVE_OPERATOR",
+          "description": "Function 'test_string_from_bytes' uses '^' transfer operator to move ownership without memory copying",
+          "weight": 0.92,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/tests/test-llama2.mojo:145:1"
+        }
+      ],
+      "summary": "Explicit ownership transfer utilizing the '^' move operator without deep cloning."
+    },
+    {
+      "pattern_type": "transfer_move_operator",
+      "category": "mojo_idiomatic",
+      "target_name": "test_matrix_slice",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.92,
+        "percentage": "92%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/tests/test-llama2.mojo:365:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "MOJO_TRANSFER_MOVE_OPERATOR",
+          "description": "Function 'test_matrix_slice' uses '^' transfer operator to move ownership without memory copying",
+          "weight": 0.92,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/tests/test-llama2.mojo:365:1"
+        }
+      ],
+      "summary": "Explicit ownership transfer utilizing the '^' move operator without deep cloning."
+    },
+    {
+      "pattern_type": "transfer_move_operator",
+      "category": "mojo_idiomatic",
+      "target_name": "__init__",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.92,
+        "percentage": "92%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:42:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "MOJO_TRANSFER_MOVE_OPERATOR",
+          "description": "Function '__init__' uses '^' transfer operator to move ownership without memory copying",
+          "weight": 0.92,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:42:1"
+        }
+      ],
+      "summary": "Explicit ownership transfer utilizing the '^' move operator without deep cloning."
+    },
+    {
+      "pattern_type": "transfer_move_operator",
+      "category": "mojo_idiomatic",
+      "target_name": "read_weights",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.92,
+        "percentage": "92%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:308:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "MOJO_TRANSFER_MOVE_OPERATOR",
+          "description": "Function 'read_weights' uses '^' transfer operator to move ownership without memory copying",
+          "weight": 0.92,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:308:1"
+        }
+      ],
+      "summary": "Explicit ownership transfer utilizing the '^' move operator without deep cloning."
+    },
+    {
+      "pattern_type": "simd_vectorization_kernel",
+      "category": "simd_hardware_acceleration",
+      "target_name": "softmax",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.95,
+        "percentage": "95%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:390:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "HARDWARE_SIMD_VECTORIZATION",
+          "description": "Function 'softmax' executes SIMD vector operations across hardware vector registers",
+          "weight": 0.95,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:390:1"
+        }
+      ],
+      "summary": "SIMD hardware vector registers (AVX-512, ARM Neon) performing multi-element parallel operations."
+    },
+    {
+      "pattern_type": "simd_vectorization_kernel",
+      "category": "simd_hardware_acceleration",
+      "target_name": "compute_row",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.95,
+        "percentage": "95%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:432:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "HARDWARE_SIMD_VECTORIZATION",
+          "description": "Function 'compute_row' executes SIMD vector operations across hardware vector registers",
+          "weight": 0.95,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:432:1"
+        }
+      ],
+      "summary": "SIMD hardware vector registers (AVX-512, ARM Neon) performing multi-element parallel operations."
+    },
+    {
+      "pattern_type": "simd_vectorization_kernel",
+      "category": "simd_hardware_acceleration",
+      "target_name": "add",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.95,
+        "percentage": "95%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:470:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "HARDWARE_SIMD_VECTORIZATION",
+          "description": "Function 'add' executes SIMD vector operations across hardware vector registers",
+          "weight": 0.95,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:470:1"
+        }
+      ],
+      "summary": "SIMD hardware vector registers (AVX-512, ARM Neon) performing multi-element parallel operations."
+    },
+    {
+      "pattern_type": "simd_vectorization_kernel",
+      "category": "simd_hardware_acceleration",
+      "target_name": "read_bytes_as",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.95,
+        "percentage": "95%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:177:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "HARDWARE_SIMD_VECTORIZATION",
+          "description": "Function 'read_bytes_as' executes SIMD vector operations across hardware vector registers",
+          "weight": 0.95,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:177:1"
+        }
+      ],
+      "summary": "SIMD hardware vector registers (AVX-512, ARM Neon) performing multi-element parallel operations."
+    },
+    {
+      "pattern_type": "simd_vectorization_kernel",
+      "category": "simd_hardware_acceleration",
+      "target_name": "loop_over_heads",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.95,
+        "percentage": "95%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:590:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "HARDWARE_SIMD_VECTORIZATION",
+          "description": "Function 'loop_over_heads' executes SIMD vector operations across hardware vector registers",
+          "weight": 0.95,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:590:1"
+        }
+      ],
+      "summary": "SIMD hardware vector registers (AVX-512, ARM Neon) performing multi-element parallel operations."
+    },
+    {
+      "pattern_type": "parallelize_multi_core",
+      "category": "simd_hardware_acceleration",
+      "target_name": "head_loop",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.95,
+        "percentage": "95%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:494:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "HARDWARE_PARALLELIZE_MULTI_CORE",
+          "description": "Function 'head_loop' distributes compute tasks across CPU cores via parallelize",
+          "weight": 0.95,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:494:1"
+        }
+      ],
+      "summary": "Multi-core task distribution using 'parallelize' and thread pools."
+    },
+    {
+      "pattern_type": "parallelize_multi_core",
+      "category": "simd_hardware_acceleration",
+      "target_name": "loop_over_heads",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.95,
+        "percentage": "95%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:590:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "HARDWARE_PARALLELIZE_MULTI_CORE",
+          "description": "Function 'loop_over_heads' distributes compute tasks across CPU cores via parallelize",
+          "weight": 0.95,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:590:1"
+        }
+      ],
+      "summary": "Multi-core task distribution using 'parallelize' and thread pools."
+    },
+    {
+      "pattern_type": "comptime_parameter_specialization",
+      "category": "comptime_metaprogramming",
+      "target_name": "read_bytes_as",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.95,
+        "percentage": "95%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:177:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "COMPTIME_FN_PARAMETERS",
+          "description": "Function 'read_bytes_as[dtype: DType]' parameterizes compile-time hardware types",
+          "weight": 0.95,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:177:1"
+        }
+      ],
+      "summary": "Compile-time parameters ('[type: DType, width: Int]') generating specialized machine code."
+    },
+    {
+      "pattern_type": "singleton_global_instance",
+      "category": "creational",
+      "target_name": "Config",
+      "target_kind": "struct",
+      "confidence": {
+        "score": 0.85,
+        "percentage": "85%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:218:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "CREATIONAL_SINGLETON_STRUCT",
+          "description": "Struct 'Config' serves as a unique Singleton instance",
+          "weight": 0.85,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:218:1"
+        }
+      ],
+      "summary": "Unique global instance or static coordinator struct."
+    },
+    {
+      "pattern_type": "singleton_global_instance",
+      "category": "creational",
+      "target_name": "RunState",
+      "target_kind": "struct",
+      "confidence": {
+        "score": 0.85,
+        "percentage": "85%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:258:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "CREATIONAL_SINGLETON_STRUCT",
+          "description": "Struct 'RunState' serves as a unique Singleton instance",
+          "weight": 0.85,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:258:1"
+        }
+      ],
+      "summary": "Unique global instance or static coordinator struct."
+    },
+    {
+      "pattern_type": "facade_unified_api",
+      "category": "structural",
+      "target_name": "Matrix",
+      "target_kind": "struct",
+      "confidence": {
+        "score": 0.8,
+        "percentage": "80%",
+        "level": "HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:20:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "STRUCTURAL_FACADE_API",
+          "description": "Struct 'Matrix' acts as unified Facade API coordinating multiple subsystem components",
+          "weight": 0.8,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:20:1"
+        }
+      ],
+      "summary": "Unified top-level API struct coordinating multiple subsystem components."
+    },
+    {
+      "pattern_type": "facade_unified_api",
+      "category": "structural",
+      "target_name": "Tokenizer",
+      "target_kind": "struct",
+      "confidence": {
+        "score": 0.8,
+        "percentage": "80%",
+        "level": "HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:166:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "STRUCTURAL_FACADE_API",
+          "description": "Struct 'Tokenizer' acts as unified Facade API coordinating multiple subsystem components",
+          "weight": 0.8,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:166:1"
+        }
+      ],
+      "summary": "Unified top-level API struct coordinating multiple subsystem components."
+    },
+    {
+      "pattern_type": "scalar_compute_loop",
+      "category": "resilience",
+      "target_name": "test_matmul_all_ones",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.88,
+        "percentage": "88%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/tests/test-matmul.mojo:53:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "HAZARD_SCALAR_COMPUTE_LOOP",
+          "description": "Compute kernel 'test_matmul_all_ones' executes scalar loop without SIMD vectorization; refactor with 'vectorize' or SIMD registers",
+          "weight": 0.88,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/tests/test-matmul.mojo:53:1"
+        }
+      ],
+      "summary": "Element-by-element scalar loop in numerical algorithm instead of SIMD vectorization."
+    },
+    {
+      "pattern_type": "scalar_compute_loop",
+      "category": "resilience",
+      "target_name": "test_matmul_larger",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.88,
+        "percentage": "88%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/tests/test-matmul.mojo:82:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "HAZARD_SCALAR_COMPUTE_LOOP",
+          "description": "Compute kernel 'test_matmul_larger' executes scalar loop without SIMD vectorization; refactor with 'vectorize' or SIMD registers",
+          "weight": 0.88,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/tests/test-matmul.mojo:82:1"
+        }
+      ],
+      "summary": "Element-by-element scalar loop in numerical algorithm instead of SIMD vectorization."
+    },
+    {
+      "pattern_type": "scalar_compute_loop",
+      "category": "resilience",
+      "target_name": "test_matmul_zero",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.88,
+        "percentage": "88%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/tests/test-matmul.mojo:116:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "HAZARD_SCALAR_COMPUTE_LOOP",
+          "description": "Compute kernel 'test_matmul_zero' executes scalar loop without SIMD vectorization; refactor with 'vectorize' or SIMD registers",
+          "weight": 0.88,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/tests/test-matmul.mojo:116:1"
+        }
+      ],
+      "summary": "Element-by-element scalar loop in numerical algorithm instead of SIMD vectorization."
+    },
+    {
+      "pattern_type": "scalar_compute_loop",
+      "category": "resilience",
+      "target_name": "test_batch_matmul_single",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.88,
+        "percentage": "88%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/tests/test-matmul.mojo:145:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "HAZARD_SCALAR_COMPUTE_LOOP",
+          "description": "Compute kernel 'test_batch_matmul_single' executes scalar loop without SIMD vectorization; refactor with 'vectorize' or SIMD registers",
+          "weight": 0.88,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/tests/test-matmul.mojo:145:1"
+        }
+      ],
+      "summary": "Element-by-element scalar loop in numerical algorithm instead of SIMD vectorization."
+    },
+    {
+      "pattern_type": "scalar_compute_loop",
+      "category": "resilience",
+      "target_name": "test_batch_matmul_two",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.88,
+        "percentage": "88%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/tests/test-matmul.mojo:177:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "HAZARD_SCALAR_COMPUTE_LOOP",
+          "description": "Compute kernel 'test_batch_matmul_two' executes scalar loop without SIMD vectorization; refactor with 'vectorize' or SIMD registers",
+          "weight": 0.88,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/tests/test-matmul.mojo:177:1"
+        }
+      ],
+      "summary": "Element-by-element scalar loop in numerical algorithm instead of SIMD vectorization."
+    },
+    {
+      "pattern_type": "scalar_compute_loop",
+      "category": "resilience",
+      "target_name": "test_batch_matmul_three",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.88,
+        "percentage": "88%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/tests/test-matmul.mojo:223:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "HAZARD_SCALAR_COMPUTE_LOOP",
+          "description": "Compute kernel 'test_batch_matmul_three' executes scalar loop without SIMD vectorization; refactor with 'vectorize' or SIMD registers",
+          "weight": 0.88,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/tests/test-matmul.mojo:223:1"
+        }
+      ],
+      "summary": "Element-by-element scalar loop in numerical algorithm instead of SIMD vectorization."
+    },
+    {
+      "pattern_type": "scalar_compute_loop",
+      "category": "resilience",
+      "target_name": "test_matmul_dimension_validation",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.88,
+        "percentage": "88%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/tests/test-matmul.mojo:279:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "HAZARD_SCALAR_COMPUTE_LOOP",
+          "description": "Compute kernel 'test_matmul_dimension_validation' executes scalar loop without SIMD vectorization; refactor with 'vectorize' or SIMD registers",
+          "weight": 0.88,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/tests/test-matmul.mojo:279:1"
+        }
+      ],
+      "summary": "Element-by-element scalar loop in numerical algorithm instead of SIMD vectorization."
+    },
+    {
+      "pattern_type": "scalar_compute_loop",
+      "category": "resilience",
+      "target_name": "test_batch_matmul_consistency",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.88,
+        "percentage": "88%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/tests/test-matmul.mojo:312:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "HAZARD_SCALAR_COMPUTE_LOOP",
+          "description": "Compute kernel 'test_batch_matmul_consistency' executes scalar loop without SIMD vectorization; refactor with 'vectorize' or SIMD registers",
+          "weight": 0.88,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/tests/test-matmul.mojo:312:1"
+        }
+      ],
+      "summary": "Element-by-element scalar loop in numerical algorithm instead of SIMD vectorization."
+    },
+    {
+      "pattern_type": "monolithic_struct_srp",
+      "category": "principle",
+      "target_name": "Matrix",
+      "target_kind": "struct",
+      "confidence": {
+        "score": 0.82,
+        "percentage": "82%",
+        "level": "HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:20:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "SRP_MONOLITHIC_STRUCT",
+          "description": "Struct 'Matrix' is a Monolithic Struct declaring 3 fields; consider decomposing into cohesive sub-structs",
+          "weight": 0.82,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:20:1"
+        }
+      ],
+      "summary": "Struct declaring excessive fields or methods, violating SRP."
+    },
+    {
+      "pattern_type": "monolithic_struct_srp",
+      "category": "principle",
+      "target_name": "Config",
+      "target_kind": "struct",
+      "confidence": {
+        "score": 0.82,
+        "percentage": "82%",
+        "level": "HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:218:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "SRP_MONOLITHIC_STRUCT",
+          "description": "Struct 'Config' is a Monolithic Struct declaring 11 fields; consider decomposing into cohesive sub-structs",
+          "weight": 0.82,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:218:1"
+        }
+      ],
+      "summary": "Struct declaring excessive fields or methods, violating SRP."
+    },
+    {
+      "pattern_type": "monolithic_struct_srp",
+      "category": "principle",
+      "target_name": "TransformerWeights",
+      "target_kind": "struct",
+      "confidence": {
+        "score": 0.9,
+        "percentage": "90%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:284:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "SRP_MONOLITHIC_STRUCT",
+          "description": "Struct 'TransformerWeights' is a Monolithic Struct declaring 14 fields; consider decomposing into cohesive sub-structs",
+          "weight": 0.9,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:284:1"
+        }
+      ],
+      "summary": "Struct declaring excessive fields or methods, violating SRP."
+    },
+    {
+      "pattern_type": "monolithic_struct_srp",
+      "category": "principle",
+      "target_name": "Transformer",
+      "target_kind": "struct",
+      "confidence": {
+        "score": 0.82,
+        "percentage": "82%",
+        "level": "HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:477:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "SRP_MONOLITHIC_STRUCT",
+          "description": "Struct 'Transformer' is a Monolithic Struct declaring 1 fields; consider decomposing into cohesive sub-structs",
+          "weight": 0.82,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:477:1"
+        }
+      ],
+      "summary": "Struct declaring excessive fields or methods, violating SRP."
+    },
+    {
+      "pattern_type": "kiss_cyclomatic_complexity",
+      "category": "principle",
+      "target_name": "bpe_encode",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.88,
+        "percentage": "88%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:682:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "KISS_CYCLOMATIC_COMPLEXITY",
+          "description": "Function 'bpe_encode' has high cyclomatic complexity (10 branch points), violating KISS",
+          "weight": 0.88,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:682:1"
+        }
+      ],
+      "summary": "Function containing excessive decision branch points (> 8)."
+    },
+    {
+      "pattern_type": "kiss_cyclomatic_complexity",
+      "category": "principle",
+      "target_name": "get_token_str",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.88,
+        "percentage": "88%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:715:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "KISS_CYCLOMATIC_COMPLEXITY",
+          "description": "Function 'get_token_str' has high cyclomatic complexity (11 branch points), violating KISS",
+          "weight": 0.88,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:715:1"
+        }
+      ],
+      "summary": "Function containing excessive decision branch points (> 8)."
+    },
+    {
+      "pattern_type": "kiss_cyclomatic_complexity",
+      "category": "principle",
+      "target_name": "argparse",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.88,
+        "percentage": "88%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:766:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "KISS_CYCLOMATIC_COMPLEXITY",
+          "description": "Function 'argparse' has high cyclomatic complexity (13 branch points), violating KISS",
+          "weight": 0.88,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:766:1"
+        }
+      ],
+      "summary": "Function containing excessive decision branch points (> 8)."
+    },
+    {
+      "pattern_type": "kiss_cyclomatic_complexity",
+      "category": "principle",
+      "target_name": "test_rope_rotation",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.88,
+        "percentage": "88%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/tests/test-transformer.mojo:27:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "KISS_CYCLOMATIC_COMPLEXITY",
+          "description": "Function 'test_rope_rotation' has high cyclomatic complexity (12 branch points), violating KISS",
+          "weight": 0.88,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/tests/test-transformer.mojo:27:1"
+        }
+      ],
+      "summary": "Function containing excessive decision branch points (> 8)."
+    },
+    {
+      "pattern_type": "kiss_long_parameter_list",
+      "category": "principle",
+      "target_name": "matmul",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.85,
+        "percentage": "85%",
+        "level": "VERY_HIGH"
+      },
+      "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:459:1",
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "KISS_LONG_PARAMETER_LIST",
+          "description": "Function 'matmul' accepts 6 parameters; consider bundling into a configuration struct",
+          "weight": 0.85,
+          "location": "/Volumes/External/Code/DPX-Mojo/benchmarks/llama2.mojo/llama2.mojo:459:1"
+        }
+      ],
+      "summary": "Function accepting >= 6 positional parameters."
+    },
+    {
+      "pattern_type": "dry_duplicate_logic",
+      "category": "principle",
+      "target_name": "file_exists",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.8,
+        "percentage": "80%",
+        "level": "HIGH"
+      },
+      "location": null,
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "DRY_DUPLICATE_CODE",
+          "description": "Identical logic duplicated across 2 function(s): file_exists, file_exists",
+          "weight": 0.8,
+          "location": null
+        }
+      ],
+      "summary": "Duplicated algorithmic sequences across multiple functions."
+    },
+    {
+      "pattern_type": "dry_duplicate_logic",
+      "category": "principle",
+      "target_name": "resolve_model_path",
+      "target_kind": "fn",
+      "confidence": {
+        "score": 0.8,
+        "percentage": "80%",
+        "level": "HIGH"
+      },
+      "location": null,
+      "related_locations": [],
+      "evidences": [
+        {
+          "rule_code": "DRY_DUPLICATE_CODE",
+          "description": "Identical logic duplicated across 2 function(s): resolve_model_path, resolve_model_path",
+          "weight": 0.8,
+          "location": null
+        }
+      ],
+      "summary": "Duplicated algorithmic sequences across multiple functions."
+    }
+  ]
+}
