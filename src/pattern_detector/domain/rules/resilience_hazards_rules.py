@@ -83,11 +83,11 @@ class AccidentalCopyOverheadRule(BaseRule):
         struct_names = {s.name for s in model.all_structs if len(s.fields) >= 3}
         for fn in model.all_functions:
             for p in fn.parameters:
-                if p.type_name in struct_names and p.convention not in ("borrowed", "inout", "ref", "owned"):
+                if p.type_name in struct_names and (p.convention == "owned" and "^" not in fn.body):
                     evidences = [
                         Evidence(
                             rule_code="HAZARD_ACCIDENTAL_COPY_OVERHEAD",
-                            description=f"Function '{fn.name}' parameter '{p.name}: {p.type_name}' may incur accidental copy overhead; specify 'borrowed' or 'inout'",
+                            description=f"Function '{fn.name}' parameter '{p.name}: {p.type_name}' takes ownership ('owned') but is never transferred ('^'); prefer 'borrowed' or 'inout'",
                             weight=0.85,
                             location=fn.location,
                         )

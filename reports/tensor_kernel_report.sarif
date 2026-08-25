@@ -1,0 +1,397 @@
+{
+  "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "DPX-Mojo",
+          "informationUri": "https://github.com/bivex/DPX-Mojo",
+          "version": "0.1.0"
+        }
+      },
+      "results": [
+        {
+          "ruleId": "struct_value_semantics",
+          "level": "note",
+          "message": {
+            "text": "Value-semantic struct with explicit field memory layout and copy/move lifecycle hooks."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo"
+                },
+                "region": {
+                  "startLine": 9,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "struct_value_semantics",
+          "level": "note",
+          "message": {
+            "text": "Value-semantic struct with explicit field memory layout and copy/move lifecycle hooks."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo"
+                },
+                "region": {
+                  "startLine": 19,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "trait_contract_interface",
+          "level": "note",
+          "message": {
+            "text": "Mojo Trait contract enabling static zero-cost polymorphic interface conformance."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo"
+                },
+                "region": {
+                  "startLine": 4,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "explicit_ownership_borrow",
+          "level": "note",
+          "message": {
+            "text": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "explicit_ownership_borrow",
+          "level": "note",
+          "message": {
+            "text": "Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo"
+                },
+                "region": {
+                  "startLine": 4,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "destruct_raii_lifecycle",
+          "level": "note",
+          "message": {
+            "text": "Deterministic resource cleanup via '__del__' destructor method."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo"
+                },
+                "region": {
+                  "startLine": 23,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "register_passable_layout",
+          "level": "note",
+          "message": {
+            "text": "Struct decorated with '@register_passable' or passed directly in machine registers."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo"
+                },
+                "region": {
+                  "startLine": 14,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "simd_vectorization_kernel",
+          "level": "note",
+          "message": {
+            "text": "SIMD hardware vector registers (AVX-512, ARM Neon) performing multi-element parallel operations."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "parallelize_multi_core",
+          "level": "note",
+          "message": {
+            "text": "Multi-core task distribution using 'parallelize' and thread pools."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo"
+                },
+                "region": {
+                  "startLine": 14,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "unsafe_raw_pointer_buffer",
+          "level": "note",
+          "message": {
+            "text": "Direct memory buffer manipulation via 'UnsafePointer' or 'DTypePointer'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo"
+                },
+                "region": {
+                  "startLine": 19,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "tensor_tiling_kernel",
+          "level": "note",
+          "message": {
+            "text": "2D/3D cache-blocked matrix multiplication tiling to fit inside L1/L2 CPU/GPU caches."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo"
+                },
+                "region": {
+                  "startLine": 4,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "comptime_parameter_specialization",
+          "level": "note",
+          "message": {
+            "text": "Compile-time parameters ('[type: DType, width: Int]') generating specialized machine code."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "comptime_parameter_specialization",
+          "level": "note",
+          "message": {
+            "text": "Compile-time parameters ('[type: DType, width: Int]') generating specialized machine code."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo"
+                },
+                "region": {
+                  "startLine": 4,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "alias_type_metaprogramming",
+          "level": "note",
+          "message": {
+            "text": "Compile-time 'alias' declarations binding types, dimensions, or constants."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "alias_type_metaprogramming",
+          "level": "note",
+          "message": {
+            "text": "Compile-time 'alias' declarations binding types, dimensions, or constants."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo"
+                },
+                "region": {
+                  "startLine": 2,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "alias_type_metaprogramming",
+          "level": "note",
+          "message": {
+            "text": "Compile-time 'alias' declarations binding types, dimensions, or constants."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo"
+                },
+                "region": {
+                  "startLine": 5,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "alias_type_metaprogramming",
+          "level": "note",
+          "message": {
+            "text": "Compile-time 'alias' declarations binding types, dimensions, or constants."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo"
+                },
+                "region": {
+                  "startLine": 6,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "compile_time_branch_specialization",
+          "level": "note",
+          "message": {
+            "text": "'@parameter if' compile-time dead code elimination."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo"
+                },
+                "region": {
+                  "startLine": 4,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "scalar_compute_loop",
+          "level": "error",
+          "message": {
+            "text": "Element-by-element scalar loop in numerical algorithm instead of SIMD vectorization."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo"
+                },
+                "region": {
+                  "startLine": 4,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

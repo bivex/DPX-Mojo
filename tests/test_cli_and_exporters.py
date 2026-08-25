@@ -47,7 +47,7 @@ def test_cli_rules_command() -> None:
     result = runner.invoke(app, ["rules"])
     assert result.exit_code == 0
     assert "DPX-Mojo" in result.stdout
-    assert "SIMD_HARDWARE_ACCELERATION" in result.stdout
+    assert "MOJO_IDIOMATIC" in result.stdout
 
 
 def test_cli_info_command() -> None:

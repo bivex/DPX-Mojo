@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pattern Scanner Report - DPX-Mojo Architecture HUD - /Volumes/External/Code/DPX-Mojo/examples/tensor_kernel</title>
+    <style>
+        :root {
+            --bg: #0d1117;
+            --card-bg: #161b22;
+            --border: #30363d;
+            --text: #c9d1d9;
+            --heading: #f0f6fc;
+            --mojo-orange: #ff4500;
+            --mojo-flame: #ff6b35;
+            --cyan: #38bdf8;
+            --green: #34d399;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace, sans-serif; }
+        body { background: var(--bg); color: var(--text); padding: 30px 20px; line-height: 1.5; }
+        .container { max-width: 1280px; margin: 0 auto; }
+        
+        header { 
+            border-bottom: 1px solid var(--border); 
+            padding-bottom: 20px; 
+            margin-bottom: 25px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        h1 { color: var(--heading); font-size: 26px; display: flex; align-items: center; gap: 10px; }
+        .subtitle { color: #8b949e; font-size: 14px; margin-top: 5px; }
+        
+        .header-actions { display: flex; gap: 10px; align-items: center; }
+        .btn-ai-context {
+            background: linear-gradient(135deg, #ff4500 0%, #ff6b35 50%, #e63946 100%);
+            color: #ffffff;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 13.5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 14px rgba(255, 69, 0, 0.35);
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .btn-ai-context:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 69, 0, 0.5);
+        }
+        .btn-view-prompt {
+            background: var(--card-bg);
+            color: var(--heading);
+            border: 1px solid var(--border);
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .btn-view-prompt:hover {
+            border-color: var(--mojo-orange);
+            color: var(--mojo-orange);
+        }
+
+        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 25px; }
+        .kpi-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 18px; }
+        .kpi-title { font-size: 12px; text-transform: uppercase; color: #8b949e; font-weight: 600; letter-spacing: 0.5px; }
+        .kpi-value { font-size: 28px; font-weight: 700; color: var(--heading); margin-top: 5px; }
+
+        .category-filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; align-items: center; }
+        .cat-filter-btn { padding: 8px 14px; border-radius: 20px; border: 1px solid var(--border); background: var(--card-bg); color: var(--heading); font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: transform 0.1s, opacity 0.2s; }
+        .cat-filter-btn:hover { transform: translateY(-1px); opacity: 0.9; }
+        .cat-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+        .btn-all { background: #21262d; color: #f0f6fc; border-color: #30363d; }
+
+        .search-bar { width: 100%; padding: 14px 18px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; color: var(--heading); font-size: 14px; margin-bottom: 25px; outline: none; transition: border-color 0.2s; }
+        .search-bar:focus { border-color: var(--mojo-orange); }
+
+        .pattern-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 15px; overflow: hidden; transition: border-color 0.2s, box-shadow 0.2s; }
+        .pattern-card:hover { border-color: #ff450088; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+        .card-header { background: #1c2128; padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-bottom: 1px solid var(--border); }
+        .header-left { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+        .header-right { display: flex; align-items: center; gap: 10px; }
+        .card-index { color: #6e7681; font-weight: 700; font-size: 13px; }
+        
+        .category-badge { padding: 3px 8px; border-radius: 4px; font-weight: 700; font-size: 11px; letter-spacing: 0.5px; }
+        .pattern-badge { padding: 3px 8px; border-radius: 4px; font-weight: 700; font-size: 12px; }
+        .target-name { color: var(--heading); font-size: 14px; }
+        
+        .confidence-badge { font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 20px; }
+        .badge-vh { background: #14532d55; color: #4ade80; border: 1px solid #22c55e; }
+        .badge-h { background: #0c4a6e55; color: #38bdf8; border: 1px solid #0284c7; }
+        .badge-m { background: #78350f55; color: #fbbf24; border: 1px solid #d97706; }
+        .badge-l { background: #7f1d1d55; color: #f87171; border: 1px solid #dc2626; }
+
+        .btn-copy-card-ai {
+            background: rgba(255, 69, 0, 0.15);
+            color: #ff6b35;
+            border: 1px solid rgba(255, 69, 0, 0.35);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11.5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .btn-copy-card-ai:hover {
+            background: rgba(255, 69, 0, 0.3);
+            color: #ffffff;
+            border-color: #ff4500;
+        }
+
+        .card-body { padding: 16px 18px; font-size: 13px; }
+        .summary-text { margin-bottom: 10px; color: #e2e8f0; font-size: 14px; }
+        .primary-loc { margin-bottom: 12px; color: #8b949e; }
+        code { background: #090d13; padding: 3px 6px; border-radius: 4px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: #ff6b35; border: 1px solid #30363d; }
+
+        .evidence-section { margin-top: 14px; }
+        .evidence-list { list-style: none; margin-top: 8px; }
+        .evidence-item { margin-bottom: 7px; padding-left: 12px; border-left: 3px solid; }
+        .weight-tag { font-weight: 700; font-family: monospace; font-size: 13px; }
+        .rule-code { color: #8b949e; font-size: 11px; font-family: monospace; }
+        .location-tag { color: #ff6b35; font-size: 11px; margin-left: 6px; }
+        .related-locs { margin-top: 12px; color: #8b949e; }
+        .related-locs ul { margin-left: 20px; margin-top: 4px; }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #10b981;
+            color: #ffffff;
+            padding: 14px 22px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 14px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+            z-index: 9999;
+        }
+        .toast.show { opacity: 1; transform: translateY(0); }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(4px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9998;
+            padding: 20px;
+        }
+        .modal-box {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            width: 100%;
+            max-width: 900px;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+        }
+        .modal-header {
+            padding: 18px 22px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .modal-title { color: var(--heading); font-size: 18px; font-weight: 700; }
+        .modal-close { background: none; border: none; color: #8b949e; font-size: 24px; cursor: pointer; }
+        .modal-body { padding: 20px 22px; overflow-y: auto; flex: 1; }
+        .prompt-textarea {
+            width: 100%;
+            height: 400px;
+            background: #090d13;
+            color: #ff6b35;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            font-family: ui-monospace, monospace;
+            font-size: 12.5px;
+            line-height: 1.4;
+            resize: vertical;
+            outline: none;
+        }
+        .modal-footer {
+            padding: 16px 22px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div>
+                <h1>🔥 DPX-Mojo Architecture & SIMD Observability HUD</h1>
+                <div class="subtitle">SIMD Vectorization, Ownership, Memory Safety, GoF 23 & AI Acceleration Engine • Target: <code>/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel</code></div>
+            </div>
+            <div class="header-actions">
+                <button class="btn-view-prompt" onclick="openPromptModal()">👁️ View AI Context</button>
+                <button class="btn-ai-context" onclick="copyFullAiContext()">🤖 Copy AI Context Prompt</button>
+            </div>
+        </header>
+
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-title">Total Detections</div>
+                <div class="kpi-value">19</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-title">High Confidence (≥70%)</div>
+                <div class="kpi-value" style="color: #4ade80;">19</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-title">Med / Low (<70%)</div>
+                <div class="kpi-value" style="color: #fbbf24;">0</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-title">Files Scanned</div>
+                <div class="kpi-value">2</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-title">Scan Duration</div>
+                <div class="kpi-value">0.000s</div>
+            </div>
+        </div>
+
+        <div class="category-filters">
+            <button class="cat-filter-btn btn-all" data-filter="all"><strong>All Categories</strong>: 19</button>
+            
+                    <button class="cat-filter-btn" data-filter="mojo_idiomatic" style="border-color: #ea580c; background: #7c2d1244; color: #f97316;">
+                        <span class="cat-dot" style="background: #fb923c;"></span>
+                        <strong>Mojo Idiomatic & Ownership</strong>: 7
+                    </button>
+                    
+                    <button class="cat-filter-btn" data-filter="simd_hardware_acceleration" style="border-color: #dc2626; background: #7f1d1d44; color: #ef4444;">
+                        <span class="cat-dot" style="background: #f87171;"></span>
+                        <strong>SIMD & Hardware</strong>: 4
+                    </button>
+                    
+                    <button class="cat-filter-btn" data-filter="comptime_metaprogramming" style="border-color: #9333ea; background: #581c8744; color: #a855f7;">
+                        <span class="cat-dot" style="background: #c084fc;"></span>
+                        <strong>Comptime Metaprogramming</strong>: 7
+                    </button>
+                    
+                    <button class="cat-filter-btn" data-filter="resilience" style="border-color: #dc2626; background: #7f1d1d44; color: #f87171;">
+                        <span class="cat-dot" style="background: #ef4444;"></span>
+                        <strong>Safety & Hazards</strong>: 1
+                    </button>
+                    
+        </div>
+
+        <input type="text" id="searchInput" class="search-bar" placeholder="🔎 Instant search by pattern name, category, target type, or rule (e.g. simd, ownership, trait, pointer, tile)...">
+
+        <div id="cardsContainer">
+            
+                <div class="pattern-card" data-pattern="struct_value_semantics" data-category="mojo_idiomatic" data-target="TensorShape" style="border-left: 4px solid #fb923c;">
+                    <div class="card-header">
+                        <div class="header-left">
+                            <span class="card-index">#1</span>
+                            <span class="category-badge" style="color: #f97316; background: #7c2d1244; border: 1px solid #ea580c;">
+                                MOJO IDIOMATIC &amp; OWNERSHIP
+                            </span>
+                            <span class="pattern-badge" style="color: #f97316; background: #7c2d1244; border: 1px solid #ea580c;">
+                                STRUCT_VALUE_SEMANTICS
+                            </span>
+                            <span class="target-name">struct: <strong>TensorShape</strong></span>
+                        </div>
+                        <div class="header-right">
+                            <span class="confidence-badge badge-vh">95% [VERY_HIGH]</span>
+                            <button class="btn-copy-card-ai" onclick='copySingleAiPrompt("Refactor and optimize the following Mojo architectural finding / kernel pattern:\n- Pattern: struct_value_semantics (Mojo Idiomatic & Ownership)\n- Target: TensorShape (struct)\n- Location: /Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo:9:1\n- Summary: Value-semantic struct with explicit field memory layout and copy/move lifecycle hooks.\n\nPlease provide an idiomatic Mojo 24.x - 25.x+ high-performance refactoring leveraging SIMD vectorization, explicit ownership (borrowed/inout/owned), and zero-cost compile-time parameters.")' title="Copy AI Refactoring Prompt">🤖 Copy for AI</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="summary-text"><strong>Summary:</strong> Value-semantic struct with explicit field memory layout and copy/move lifecycle hooks.</p>
+                        <p class="primary-loc"><strong>Primary Location:</strong> <code>/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo:9:1</code></p>
+                        <div class="evidence-section">
+                            <strong>Evidence Trail (1 heuristics):</strong>
+                            <ul class="evidence-list">
+                                <li class="evidence-item" style="border-left-color: #fb923c;"><span class="weight-tag" style="color: #f97316;">+95%</span> <span class="rule-code">[MOJO_VALUE_SEMANTICS_DECORATOR]</span> Struct &#x27;TensorShape&#x27; implements value semantics with @value synthesized constructors <span class="location-tag">📍 /Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo:9:1</span></li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <div class="pattern-card" data-pattern="struct_value_semantics" data-category="mojo_idiomatic" data-target="Tensor" style="border-left: 4px solid #fb923c;">
+                    <div class="card-header">
+                        <div class="header-left">
+                            <span class="card-index">#2</span>
+                            <span class="category-badge" style="color: #f97316; background: #7c2d1244; border: 1px solid #ea580c;">
+                                MOJO IDIOMATIC &amp; OWNERSHIP
+                            </span>
+                            <span class="pattern-badge" style="color: #f97316; background: #7c2d1244; border: 1px solid #ea580c;">
+                                STRUCT_VALUE_SEMANTICS
+                            </span>
+                            <span class="target-name">struct: <strong>Tensor</strong></span>
+                        </div>
+                        <div class="header-right">
+                            <span class="confidence-badge badge-vh">95% [VERY_HIGH]</span>
+                            <button class="btn-copy-card-ai" onclick='copySingleAiPrompt("Refactor and optimize the following Mojo architectural finding / kernel pattern:\n- Pattern: struct_value_semantics (Mojo Idiomatic & Ownership)\n- Target: Tensor (struct)\n- Location: /Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo:19:1\n- Summary: Value-semantic struct with explicit field memory layout and copy/move lifecycle hooks.\n\nPlease provide an idiomatic Mojo 24.x - 25.x+ high-performance refactoring leveraging SIMD vectorization, explicit ownership (borrowed/inout/owned), and zero-cost compile-time parameters.")' title="Copy AI Refactoring Prompt">🤖 Copy for AI</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="summary-text"><strong>Summary:</strong> Value-semantic struct with explicit field memory layout and copy/move lifecycle hooks.</p>
+                        <p class="primary-loc"><strong>Primary Location:</strong> <code>/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo:19:1</code></p>
+                        <div class="evidence-section">
+                            <strong>Evidence Trail (1 heuristics):</strong>
+                            <ul class="evidence-list">
+                                <li class="evidence-item" style="border-left-color: #fb923c;"><span class="weight-tag" style="color: #f97316;">+95%</span> <span class="rule-code">[MOJO_VALUE_SEMANTICS_DECORATOR]</span> Struct &#x27;Tensor&#x27; implements value semantics with @value synthesized constructors <span class="location-tag">📍 /Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo:19:1</span></li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <div class="pattern-card" data-pattern="trait_contract_interface" data-category="mojo_idiomatic" data-target="ComputeLayer" style="border-left: 4px solid #fb923c;">
+                    <div class="card-header">
+                        <div class="header-left">
+                            <span class="card-index">#3</span>
+                            <span class="category-badge" style="color: #f97316; background: #7c2d1244; border: 1px solid #ea580c;">
+                                MOJO IDIOMATIC &amp; OWNERSHIP
+                            </span>
+                            <span class="pattern-badge" style="color: #f97316; background: #7c2d1244; border: 1px solid #ea580c;">
+                                TRAIT_CONTRACT_INTERFACE
+                            </span>
+                            <span class="target-name">trait: <strong>ComputeLayer</strong></span>
+                        </div>
+                        <div class="header-right">
+                            <span class="confidence-badge badge-vh">95% [VERY_HIGH]</span>
+                            <button class="btn-copy-card-ai" onclick='copySingleAiPrompt("Refactor and optimize the following Mojo architectural finding / kernel pattern:\n- Pattern: trait_contract_interface (Mojo Idiomatic & Ownership)\n- Target: ComputeLayer (trait)\n- Location: /Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo:4:1\n- Summary: Mojo Trait contract enabling static zero-cost polymorphic interface conformance.\n\nPlease provide an idiomatic Mojo 24.x - 25.x+ high-performance refactoring leveraging SIMD vectorization, explicit ownership (borrowed/inout/owned), and zero-cost compile-time parameters.")' title="Copy AI Refactoring Prompt">🤖 Copy for AI</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="summary-text"><strong>Summary:</strong> Mojo Trait contract enabling static zero-cost polymorphic interface conformance.</p>
+                        <p class="primary-loc"><strong>Primary Location:</strong> <code>/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo:4:1</code></p>
+                        <div class="evidence-section">
+                            <strong>Evidence Trail (1 heuristics):</strong>
+                            <ul class="evidence-list">
+                                <li class="evidence-item" style="border-left-color: #fb923c;"><span class="weight-tag" style="color: #f97316;">+95%</span> <span class="rule-code">[MOJO_TRAIT_CONTRACT]</span> Trait &#x27;ComputeLayer&#x27; defines static compile-time interface contract with 1 method(s) <span class="location-tag">📍 /Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo:4:1</span></li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <div class="pattern-card" data-pattern="explicit_ownership_borrow" data-category="mojo_idiomatic" data-target="vectorized_add" style="border-left: 4px solid #fb923c;">
+                    <div class="card-header">
+                        <div class="header-left">
+                            <span class="card-index">#4</span>
+                            <span class="category-badge" style="color: #f97316; background: #7c2d1244; border: 1px solid #ea580c;">
+                                MOJO IDIOMATIC &amp; OWNERSHIP
+                            </span>
+                            <span class="pattern-badge" style="color: #f97316; background: #7c2d1244; border: 1px solid #ea580c;">
+                                EXPLICIT_OWNERSHIP_BORROW
+                            </span>
+                            <span class="target-name">fn: <strong>vectorized_add</strong></span>
+                        </div>
+                        <div class="header-right">
+                            <span class="confidence-badge badge-vh">90% [VERY_HIGH]</span>
+                            <button class="btn-copy-card-ai" onclick='copySingleAiPrompt("Refactor and optimize the following Mojo architectural finding / kernel pattern:\n- Pattern: explicit_ownership_borrow (Mojo Idiomatic & Ownership)\n- Target: vectorized_add (fn)\n- Location: /Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:1:1\n- Summary: Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies.\n\nPlease provide an idiomatic Mojo 24.x - 25.x+ high-performance refactoring leveraging SIMD vectorization, explicit ownership (borrowed/inout/owned), and zero-cost compile-time parameters.")' title="Copy AI Refactoring Prompt">🤖 Copy for AI</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="summary-text"><strong>Summary:</strong> Explicit function argument conventions (&#x27;borrowed&#x27;, &#x27;inout&#x27;, &#x27;owned&#x27;) preventing memory copies.</p>
+                        <p class="primary-loc"><strong>Primary Location:</strong> <code>/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:1:1</code></p>
+                        <div class="evidence-section">
+                            <strong>Evidence Trail (1 heuristics):</strong>
+                            <ul class="evidence-list">
+                                <li class="evidence-item" style="border-left-color: #fb923c;"><span class="weight-tag" style="color: #f97316;">+90%</span> <span class="rule-code">[MOJO_EXPLICIT_OWNERSHIP]</span> Function &#x27;vectorized_add&#x27; enforces explicit memory conventions (a: borrowed, width]: borrowed, b: borrowed) <span class="location-tag">📍 /Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:1:1</span></li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <div class="pattern-card" data-pattern="explicit_ownership_borrow" data-category="mojo_idiomatic" data-target="tiled_matmul_kernel" style="border-left: 4px solid #fb923c;">
+                    <div class="card-header">
+                        <div class="header-left">
+                            <span class="card-index">#5</span>
+                            <span class="category-badge" style="color: #f97316; background: #7c2d1244; border: 1px solid #ea580c;">
+                                MOJO IDIOMATIC &amp; OWNERSHIP
+                            </span>
+                            <span class="pattern-badge" style="color: #f97316; background: #7c2d1244; border: 1px solid #ea580c;">
+                                EXPLICIT_OWNERSHIP_BORROW
+                            </span>
+                            <span class="target-name">fn: <strong>tiled_matmul_kernel</strong></span>
+                        </div>
+                        <div class="header-right">
+                            <span class="confidence-badge badge-vh">90% [VERY_HIGH]</span>
+                            <button class="btn-copy-card-ai" onclick='copySingleAiPrompt("Refactor and optimize the following Mojo architectural finding / kernel pattern:\n- Pattern: explicit_ownership_borrow (Mojo Idiomatic & Ownership)\n- Target: tiled_matmul_kernel (fn)\n- Location: /Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:4:1\n- Summary: Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies.\n\nPlease provide an idiomatic Mojo 24.x - 25.x+ high-performance refactoring leveraging SIMD vectorization, explicit ownership (borrowed/inout/owned), and zero-cost compile-time parameters.")' title="Copy AI Refactoring Prompt">🤖 Copy for AI</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="summary-text"><strong>Summary:</strong> Explicit function argument conventions (&#x27;borrowed&#x27;, &#x27;inout&#x27;, &#x27;owned&#x27;) preventing memory copies.</p>
+                        <p class="primary-loc"><strong>Primary Location:</strong> <code>/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:4:1</code></p>
+                        <div class="evidence-section">
+                            <strong>Evidence Trail (1 heuristics):</strong>
+                            <ul class="evidence-list">
+                                <li class="evidence-item" style="border-left-color: #fb923c;"><span class="weight-tag" style="color: #f97316;">+90%</span> <span class="rule-code">[MOJO_EXPLICIT_OWNERSHIP]</span> Function &#x27;tiled_matmul_kernel&#x27; enforces explicit memory conventions (a: borrowed, b: borrowed, c: inout) <span class="location-tag">📍 /Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:4:1</span></li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <div class="pattern-card" data-pattern="destruct_raii_lifecycle" data-category="mojo_idiomatic" data-target="Tensor" style="border-left: 4px solid #fb923c;">
+                    <div class="card-header">
+                        <div class="header-left">
+                            <span class="card-index">#6</span>
+                            <span class="category-badge" style="color: #f97316; background: #7c2d1244; border: 1px solid #ea580c;">
+                                MOJO IDIOMATIC &amp; OWNERSHIP
+                            </span>
+                            <span class="pattern-badge" style="color: #f97316; background: #7c2d1244; border: 1px solid #ea580c;">
+                                DESTRUCT_RAII_LIFECYCLE
+                            </span>
+                            <span class="target-name">struct: <strong>Tensor</strong></span>
+                        </div>
+                        <div class="header-right">
+                            <span class="confidence-badge badge-vh">95% [VERY_HIGH]</span>
+                            <button class="btn-copy-card-ai" onclick='copySingleAiPrompt("Refactor and optimize the following Mojo architectural finding / kernel pattern:\n- Pattern: destruct_raii_lifecycle (Mojo Idiomatic & Ownership)\n- Target: Tensor (struct)\n- Location: /Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo:23:1\n- Summary: Deterministic resource cleanup via '__del__' destructor method.\n\nPlease provide an idiomatic Mojo 24.x - 25.x+ high-performance refactoring leveraging SIMD vectorization, explicit ownership (borrowed/inout/owned), and zero-cost compile-time parameters.")' title="Copy AI Refactoring Prompt">🤖 Copy for AI</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="summary-text"><strong>Summary:</strong> Deterministic resource cleanup via &#x27;__del__&#x27; destructor method.</p>
+                        <p class="primary-loc"><strong>Primary Location:</strong> <code>/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo:23:1</code></p>
+                        <div class="evidence-section">
+                            <strong>Evidence Trail (1 heuristics):</strong>
+                            <ul class="evidence-list">
+                                <li class="evidence-item" style="border-left-color: #fb923c;"><span class="weight-tag" style="color: #f97316;">+95%</span> <span class="rule-code">[MOJO_RAII_DESTRUCTOR]</span> Struct &#x27;Tensor&#x27; implements deterministic RAII resource cleanup via __del__ <span class="location-tag">📍 /Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo:23:1</span></li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <div class="pattern-card" data-pattern="register_passable_layout" data-category="mojo_idiomatic" data-target="Vec2" style="border-left: 4px solid #fb923c;">
+                    <div class="card-header">
+                        <div class="header-left">
+                            <span class="card-index">#7</span>
+                            <span class="category-badge" style="color: #f97316; background: #7c2d1244; border: 1px solid #ea580c;">
+                                MOJO IDIOMATIC &amp; OWNERSHIP
+                            </span>
+                            <span class="pattern-badge" style="color: #f97316; background: #7c2d1244; border: 1px solid #ea580c;">
+                                REGISTER_PASSABLE_LAYOUT
+                            </span>
+                            <span class="target-name">struct: <strong>Vec2</strong></span>
+                        </div>
+                        <div class="header-right">
+                            <span class="confidence-badge badge-vh">95% [VERY_HIGH]</span>
+                            <button class="btn-copy-card-ai" onclick='copySingleAiPrompt("Refactor and optimize the following Mojo architectural finding / kernel pattern:\n- Pattern: register_passable_layout (Mojo Idiomatic & Ownership)\n- Target: Vec2 (struct)\n- Location: /Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo:14:1\n- Summary: Struct decorated with '@register_passable' or passed directly in machine registers.\n\nPlease provide an idiomatic Mojo 24.x - 25.x+ high-performance refactoring leveraging SIMD vectorization, explicit ownership (borrowed/inout/owned), and zero-cost compile-time parameters.")' title="Copy AI Refactoring Prompt">🤖 Copy for AI</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="summary-text"><strong>Summary:</strong> Struct decorated with &#x27;@register_passable&#x27; or passed directly in machine registers.</p>
+                        <p class="primary-loc"><strong>Primary Location:</strong> <code>/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo:14:1</code></p>
+                        <div class="evidence-section">
+                            <strong>Evidence Trail (1 heuristics):</strong>
+                            <ul class="evidence-list">
+                                <li class="evidence-item" style="border-left-color: #fb923c;"><span class="weight-tag" style="color: #f97316;">+95%</span> <span class="rule-code">[MOJO_REGISTER_PASSABLE]</span> Struct &#x27;Vec2&#x27; is decorated with @register_passable for direct zero-overhead register passing <span class="location-tag">📍 /Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo:14:1</span></li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <div class="pattern-card" data-pattern="simd_vectorization_kernel" data-category="simd_hardware_acceleration" data-target="vectorized_add" style="border-left: 4px solid #f87171;">
+                    <div class="card-header">
+                        <div class="header-left">
+                            <span class="card-index">#8</span>
+                            <span class="category-badge" style="color: #ef4444; background: #7f1d1d44; border: 1px solid #dc2626;">
+                                SIMD &amp; HARDWARE
+                            </span>
+                            <span class="pattern-badge" style="color: #ef4444; background: #7f1d1d44; border: 1px solid #dc2626;">
+                                SIMD_VECTORIZATION_KERNEL
+                            </span>
+                            <span class="target-name">fn: <strong>vectorized_add</strong></span>
+                        </div>
+                        <div class="header-right">
+                            <span class="confidence-badge badge-vh">95% [VERY_HIGH]</span>
+                            <button class="btn-copy-card-ai" onclick='copySingleAiPrompt("Refactor and optimize the following Mojo architectural finding / kernel pattern:\n- Pattern: simd_vectorization_kernel (SIMD & Hardware)\n- Target: vectorized_add (fn)\n- Location: /Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:1:1\n- Summary: SIMD hardware vector registers (AVX-512, ARM Neon) performing multi-element parallel operations.\n\nPlease provide an idiomatic Mojo 24.x - 25.x+ high-performance refactoring leveraging SIMD vectorization, explicit ownership (borrowed/inout/owned), and zero-cost compile-time parameters.")' title="Copy AI Refactoring Prompt">🤖 Copy for AI</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="summary-text"><strong>Summary:</strong> SIMD hardware vector registers (AVX-512, ARM Neon) performing multi-element parallel operations.</p>
+                        <p class="primary-loc"><strong>Primary Location:</strong> <code>/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:1:1</code></p>
+                        <div class="evidence-section">
+                            <strong>Evidence Trail (1 heuristics):</strong>
+                            <ul class="evidence-list">
+                                <li class="evidence-item" style="border-left-color: #f87171;"><span class="weight-tag" style="color: #ef4444;">+95%</span> <span class="rule-code">[HARDWARE_SIMD_VECTORIZATION]</span> Function &#x27;vectorized_add&#x27; executes SIMD vector operations across hardware vector registers <span class="location-tag">📍 /Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:1:1</span></li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <div class="pattern-card" data-pattern="parallelize_multi_core" data-category="simd_hardware_acceleration" data-target="parallel_tensor_dispatch" style="border-left: 4px solid #f87171;">
+                    <div class="card-header">
+                        <div class="header-left">
+                            <span class="card-index">#9</span>
+                            <span class="category-badge" style="color: #ef4444; background: #7f1d1d44; border: 1px solid #dc2626;">
+                                SIMD &amp; HARDWARE
+                            </span>
+                            <span class="pattern-badge" style="color: #ef4444; background: #7f1d1d44; border: 1px solid #dc2626;">
+                                PARALLELIZE_MULTI_CORE
+                            </span>
+                            <span class="target-name">fn: <strong>parallel_tensor_dispatch</strong></span>
+                        </div>
+                        <div class="header-right">
+                            <span class="confidence-badge badge-vh">95% [VERY_HIGH]</span>
+                            <button class="btn-copy-card-ai" onclick='copySingleAiPrompt("Refactor and optimize the following Mojo architectural finding / kernel pattern:\n- Pattern: parallelize_multi_core (SIMD & Hardware)\n- Target: parallel_tensor_dispatch (fn)\n- Location: /Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:14:1\n- Summary: Multi-core task distribution using 'parallelize' and thread pools.\n\nPlease provide an idiomatic Mojo 24.x - 25.x+ high-performance refactoring leveraging SIMD vectorization, explicit ownership (borrowed/inout/owned), and zero-cost compile-time parameters.")' title="Copy AI Refactoring Prompt">🤖 Copy for AI</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="summary-text"><strong>Summary:</strong> Multi-core task distribution using &#x27;parallelize&#x27; and thread pools.</p>
+                        <p class="primary-loc"><strong>Primary Location:</strong> <code>/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:14:1</code></p>
+                        <div class="evidence-section">
+                            <strong>Evidence Trail (1 heuristics):</strong>
+                            <ul class="evidence-list">
+                                <li class="evidence-item" style="border-left-color: #f87171;"><span class="weight-tag" style="color: #ef4444;">+95%</span> <span class="rule-code">[HARDWARE_PARALLELIZE_MULTI_CORE]</span> Function &#x27;parallel_tensor_dispatch&#x27; distributes compute tasks across CPU cores via parallelize <span class="location-tag">📍 /Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:14:1</span></li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <div class="pattern-card" data-pattern="unsafe_raw_pointer_buffer" data-category="simd_hardware_acceleration" data-target="Tensor" style="border-left: 4px solid #f87171;">
+                    <div class="card-header">
+                        <div class="header-left">
+                            <span class="card-index">#10</span>
+                            <span class="category-badge" style="color: #ef4444; background: #7f1d1d44; border: 1px solid #dc2626;">
+                                SIMD &amp; HARDWARE
+                            </span>
+                            <span class="pattern-badge" style="color: #ef4444; background: #7f1d1d44; border: 1px solid #dc2626;">
+                                UNSAFE_RAW_POINTER_BUFFER
+                            </span>
+                            <span class="target-name">struct: <strong>Tensor</strong></span>
+                        </div>
+                        <div class="header-right">
+                            <span class="confidence-badge badge-vh">92% [VERY_HIGH]</span>
+                            <button class="btn-copy-card-ai" onclick='copySingleAiPrompt("Refactor and optimize the following Mojo architectural finding / kernel pattern:\n- Pattern: unsafe_raw_pointer_buffer (SIMD & Hardware)\n- Target: Tensor (struct)\n- Location: /Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo:19:1\n- Summary: Direct memory buffer manipulation via 'UnsafePointer' or 'DTypePointer'.\n\nPlease provide an idiomatic Mojo 24.x - 25.x+ high-performance refactoring leveraging SIMD vectorization, explicit ownership (borrowed/inout/owned), and zero-cost compile-time parameters.")' title="Copy AI Refactoring Prompt">🤖 Copy for AI</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="summary-text"><strong>Summary:</strong> Direct memory buffer manipulation via &#x27;UnsafePointer&#x27; or &#x27;DTypePointer&#x27;.</p>
+                        <p class="primary-loc"><strong>Primary Location:</strong> <code>/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo:19:1</code></p>
+                        <div class="evidence-section">
+                            <strong>Evidence Trail (1 heuristics):</strong>
+                            <ul class="evidence-list">
+                                <li class="evidence-item" style="border-left-color: #f87171;"><span class="weight-tag" style="color: #ef4444;">+92%</span> <span class="rule-code">[HARDWARE_UNSAFE_POINTER_BUFFER]</span> Struct &#x27;Tensor&#x27; manages direct memory buffer via &#x27;data_ptr: UnsafePointer[Float32]&#x27; <span class="location-tag">📍 /Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo:19:1</span></li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <div class="pattern-card" data-pattern="tensor_tiling_kernel" data-category="simd_hardware_acceleration" data-target="tiled_matmul_kernel" style="border-left: 4px solid #f87171;">
+                    <div class="card-header">
+                        <div class="header-left">
+                            <span class="card-index">#11</span>
+                            <span class="category-badge" style="color: #ef4444; background: #7f1d1d44; border: 1px solid #dc2626;">
+                                SIMD &amp; HARDWARE
+                            </span>
+                            <span class="pattern-badge" style="color: #ef4444; background: #7f1d1d44; border: 1px solid #dc2626;">
+                                TENSOR_TILING_KERNEL
+                            </span>
+                            <span class="target-name">fn: <strong>tiled_matmul_kernel</strong></span>
+                        </div>
+                        <div class="header-right">
+                            <span class="confidence-badge badge-vh">90% [VERY_HIGH]</span>
+                            <button class="btn-copy-card-ai" onclick='copySingleAiPrompt("Refactor and optimize the following Mojo architectural finding / kernel pattern:\n- Pattern: tensor_tiling_kernel (SIMD & Hardware)\n- Target: tiled_matmul_kernel (fn)\n- Location: /Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:4:1\n- Summary: 2D/3D cache-blocked matrix multiplication tiling to fit inside L1/L2 CPU/GPU caches.\n\nPlease provide an idiomatic Mojo 24.x - 25.x+ high-performance refactoring leveraging SIMD vectorization, explicit ownership (borrowed/inout/owned), and zero-cost compile-time parameters.")' title="Copy AI Refactoring Prompt">🤖 Copy for AI</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="summary-text"><strong>Summary:</strong> 2D/3D cache-blocked matrix multiplication tiling to fit inside L1/L2 CPU/GPU caches.</p>
+                        <p class="primary-loc"><strong>Primary Location:</strong> <code>/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:4:1</code></p>
+                        <div class="evidence-section">
+                            <strong>Evidence Trail (1 heuristics):</strong>
+                            <ul class="evidence-list">
+                                <li class="evidence-item" style="border-left-color: #f87171;"><span class="weight-tag" style="color: #ef4444;">+90%</span> <span class="rule-code">[HARDWARE_TENSOR_TILING]</span> Function &#x27;tiled_matmul_kernel&#x27; performs cache-blocked tensor tiling to maximize L1/L2 data reuse <span class="location-tag">📍 /Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:4:1</span></li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <div class="pattern-card" data-pattern="comptime_parameter_specialization" data-category="comptime_metaprogramming" data-target="vectorized_add" style="border-left: 4px solid #c084fc;">
+                    <div class="card-header">
+                        <div class="header-left">
+                            <span class="card-index">#12</span>
+                            <span class="category-badge" style="color: #a855f7; background: #581c8744; border: 1px solid #9333ea;">
+                                COMPTIME METAPROGRAMMING
+                            </span>
+                            <span class="pattern-badge" style="color: #a855f7; background: #581c8744; border: 1px solid #9333ea;">
+                                COMPTIME_PARAMETER_SPECIALIZATION
+                            </span>
+                            <span class="target-name">fn: <strong>vectorized_add</strong></span>
+                        </div>
+                        <div class="header-right">
+                            <span class="confidence-badge badge-vh">95% [VERY_HIGH]</span>
+                            <button class="btn-copy-card-ai" onclick='copySingleAiPrompt("Refactor and optimize the following Mojo architectural finding / kernel pattern:\n- Pattern: comptime_parameter_specialization (Comptime Metaprogramming)\n- Target: vectorized_add (fn)\n- Location: /Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:1:1\n- Summary: Compile-time parameters ('[type: DType, width: Int]') generating specialized machine code.\n\nPlease provide an idiomatic Mojo 24.x - 25.x+ high-performance refactoring leveraging SIMD vectorization, explicit ownership (borrowed/inout/owned), and zero-cost compile-time parameters.")' title="Copy AI Refactoring Prompt">🤖 Copy for AI</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="summary-text"><strong>Summary:</strong> Compile-time parameters (&#x27;[type: DType, width: Int]&#x27;) generating specialized machine code.</p>
+                        <p class="primary-loc"><strong>Primary Location:</strong> <code>/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:1:1</code></p>
+                        <div class="evidence-section">
+                            <strong>Evidence Trail (1 heuristics):</strong>
+                            <ul class="evidence-list">
+                                <li class="evidence-item" style="border-left-color: #c084fc;"><span class="weight-tag" style="color: #a855f7;">+95%</span> <span class="rule-code">[COMPTIME_FN_PARAMETERS]</span> Function &#x27;vectorized_add[width: Int]&#x27; parameterizes compile-time hardware types <span class="location-tag">📍 /Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:1:1</span></li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <div class="pattern-card" data-pattern="comptime_parameter_specialization" data-category="comptime_metaprogramming" data-target="tiled_matmul_kernel" style="border-left: 4px solid #c084fc;">
+                    <div class="card-header">
+                        <div class="header-left">
+                            <span class="card-index">#13</span>
+                            <span class="category-badge" style="color: #a855f7; background: #581c8744; border: 1px solid #9333ea;">
+                                COMPTIME METAPROGRAMMING
+                            </span>
+                            <span class="pattern-badge" style="color: #a855f7; background: #581c8744; border: 1px solid #9333ea;">
+                                COMPTIME_PARAMETER_SPECIALIZATION
+                            </span>
+                            <span class="target-name">fn: <strong>tiled_matmul_kernel</strong></span>
+                        </div>
+                        <div class="header-right">
+                            <span class="confidence-badge badge-vh">95% [VERY_HIGH]</span>
+                            <button class="btn-copy-card-ai" onclick='copySingleAiPrompt("Refactor and optimize the following Mojo architectural finding / kernel pattern:\n- Pattern: comptime_parameter_specialization (Comptime Metaprogramming)\n- Target: tiled_matmul_kernel (fn)\n- Location: /Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:4:1\n- Summary: Compile-time parameters ('[type: DType, width: Int]') generating specialized machine code.\n\nPlease provide an idiomatic Mojo 24.x - 25.x+ high-performance refactoring leveraging SIMD vectorization, explicit ownership (borrowed/inout/owned), and zero-cost compile-time parameters.")' title="Copy AI Refactoring Prompt">🤖 Copy for AI</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="summary-text"><strong>Summary:</strong> Compile-time parameters (&#x27;[type: DType, width: Int]&#x27;) generating specialized machine code.</p>
+                        <p class="primary-loc"><strong>Primary Location:</strong> <code>/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:4:1</code></p>
+                        <div class="evidence-section">
+                            <strong>Evidence Trail (1 heuristics):</strong>
+                            <ul class="evidence-list">
+                                <li class="evidence-item" style="border-left-color: #c084fc;"><span class="weight-tag" style="color: #a855f7;">+95%</span> <span class="rule-code">[COMPTIME_FN_PARAMETERS]</span> Function &#x27;tiled_matmul_kernel[tile_size: Int]&#x27; parameterizes compile-time hardware types <span class="location-tag">📍 /Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:4:1</span></li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <div class="pattern-card" data-pattern="alias_type_metaprogramming" data-category="comptime_metaprogramming" data-target="DTypeFloat" style="border-left: 4px solid #c084fc;">
+                    <div class="card-header">
+                        <div class="header-left">
+                            <span class="card-index">#14</span>
+                            <span class="category-badge" style="color: #a855f7; background: #581c8744; border: 1px solid #9333ea;">
+                                COMPTIME METAPROGRAMMING
+                            </span>
+                            <span class="pattern-badge" style="color: #a855f7; background: #581c8744; border: 1px solid #9333ea;">
+                                ALIAS_TYPE_METAPROGRAMMING
+                            </span>
+                            <span class="target-name">alias: <strong>DTypeFloat</strong></span>
+                        </div>
+                        <div class="header-right">
+                            <span class="confidence-badge badge-vh">90% [VERY_HIGH]</span>
+                            <button class="btn-copy-card-ai" onclick='copySingleAiPrompt("Refactor and optimize the following Mojo architectural finding / kernel pattern:\n- Pattern: alias_type_metaprogramming (Comptime Metaprogramming)\n- Target: DTypeFloat (alias)\n- Location: /Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo:1:1\n- Summary: Compile-time 'alias' declarations binding types, dimensions, or constants.\n\nPlease provide an idiomatic Mojo 24.x - 25.x+ high-performance refactoring leveraging SIMD vectorization, explicit ownership (borrowed/inout/owned), and zero-cost compile-time parameters.")' title="Copy AI Refactoring Prompt">🤖 Copy for AI</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="summary-text"><strong>Summary:</strong> Compile-time &#x27;alias&#x27; declarations binding types, dimensions, or constants.</p>
+                        <p class="primary-loc"><strong>Primary Location:</strong> <code>/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo:1:1</code></p>
+                        <div class="evidence-section">
+                            <strong>Evidence Trail (1 heuristics):</strong>
+                            <ul class="evidence-list">
+                                <li class="evidence-item" style="border-left-color: #c084fc;"><span class="weight-tag" style="color: #a855f7;">+90%</span> <span class="rule-code">[COMPTIME_ALIAS_DECLARATION]</span> Alias &#x27;DTypeFloat = DType.float32&#x27; defines compile-time type or constant expression <span class="location-tag">📍 /Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo:1:1</span></li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <div class="pattern-card" data-pattern="alias_type_metaprogramming" data-category="comptime_metaprogramming" data-target="SIMDWidth" style="border-left: 4px solid #c084fc;">
+                    <div class="card-header">
+                        <div class="header-left">
+                            <span class="card-index">#15</span>
+                            <span class="category-badge" style="color: #a855f7; background: #581c8744; border: 1px solid #9333ea;">
+                                COMPTIME METAPROGRAMMING
+                            </span>
+                            <span class="pattern-badge" style="color: #a855f7; background: #581c8744; border: 1px solid #9333ea;">
+                                ALIAS_TYPE_METAPROGRAMMING
+                            </span>
+                            <span class="target-name">alias: <strong>SIMDWidth</strong></span>
+                        </div>
+                        <div class="header-right">
+                            <span class="confidence-badge badge-vh">90% [VERY_HIGH]</span>
+                            <button class="btn-copy-card-ai" onclick='copySingleAiPrompt("Refactor and optimize the following Mojo architectural finding / kernel pattern:\n- Pattern: alias_type_metaprogramming (Comptime Metaprogramming)\n- Target: SIMDWidth (alias)\n- Location: /Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo:2:1\n- Summary: Compile-time 'alias' declarations binding types, dimensions, or constants.\n\nPlease provide an idiomatic Mojo 24.x - 25.x+ high-performance refactoring leveraging SIMD vectorization, explicit ownership (borrowed/inout/owned), and zero-cost compile-time parameters.")' title="Copy AI Refactoring Prompt">🤖 Copy for AI</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="summary-text"><strong>Summary:</strong> Compile-time &#x27;alias&#x27; declarations binding types, dimensions, or constants.</p>
+                        <p class="primary-loc"><strong>Primary Location:</strong> <code>/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo:2:1</code></p>
+                        <div class="evidence-section">
+                            <strong>Evidence Trail (1 heuristics):</strong>
+                            <ul class="evidence-list">
+                                <li class="evidence-item" style="border-left-color: #c084fc;"><span class="weight-tag" style="color: #a855f7;">+90%</span> <span class="rule-code">[COMPTIME_ALIAS_DECLARATION]</span> Alias &#x27;SIMDWidth = 8&#x27; defines compile-time type or constant expression <span class="location-tag">📍 /Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo:2:1</span></li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <div class="pattern-card" data-pattern="alias_type_metaprogramming" data-category="comptime_metaprogramming" data-target="tile_m" style="border-left: 4px solid #c084fc;">
+                    <div class="card-header">
+                        <div class="header-left">
+                            <span class="card-index">#16</span>
+                            <span class="category-badge" style="color: #a855f7; background: #581c8744; border: 1px solid #9333ea;">
+                                COMPTIME METAPROGRAMMING
+                            </span>
+                            <span class="pattern-badge" style="color: #a855f7; background: #581c8744; border: 1px solid #9333ea;">
+                                ALIAS_TYPE_METAPROGRAMMING
+                            </span>
+                            <span class="target-name">alias: <strong>tile_m</strong></span>
+                        </div>
+                        <div class="header-right">
+                            <span class="confidence-badge badge-vh">90% [VERY_HIGH]</span>
+                            <button class="btn-copy-card-ai" onclick='copySingleAiPrompt("Refactor and optimize the following Mojo architectural finding / kernel pattern:\n- Pattern: alias_type_metaprogramming (Comptime Metaprogramming)\n- Target: tile_m (alias)\n- Location: /Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:5:1\n- Summary: Compile-time 'alias' declarations binding types, dimensions, or constants.\n\nPlease provide an idiomatic Mojo 24.x - 25.x+ high-performance refactoring leveraging SIMD vectorization, explicit ownership (borrowed/inout/owned), and zero-cost compile-time parameters.")' title="Copy AI Refactoring Prompt">🤖 Copy for AI</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="summary-text"><strong>Summary:</strong> Compile-time &#x27;alias&#x27; declarations binding types, dimensions, or constants.</p>
+                        <p class="primary-loc"><strong>Primary Location:</strong> <code>/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:5:1</code></p>
+                        <div class="evidence-section">
+                            <strong>Evidence Trail (1 heuristics):</strong>
+                            <ul class="evidence-list">
+                                <li class="evidence-item" style="border-left-color: #c084fc;"><span class="weight-tag" style="color: #a855f7;">+90%</span> <span class="rule-code">[COMPTIME_ALIAS_DECLARATION]</span> Alias &#x27;tile_m = 32&#x27; defines compile-time type or constant expression <span class="location-tag">📍 /Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:5:1</span></li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <div class="pattern-card" data-pattern="alias_type_metaprogramming" data-category="comptime_metaprogramming" data-target="tile_n" style="border-left: 4px solid #c084fc;">
+                    <div class="card-header">
+                        <div class="header-left">
+                            <span class="card-index">#17</span>
+                            <span class="category-badge" style="color: #a855f7; background: #581c8744; border: 1px solid #9333ea;">
+                                COMPTIME METAPROGRAMMING
+                            </span>
+                            <span class="pattern-badge" style="color: #a855f7; background: #581c8744; border: 1px solid #9333ea;">
+                                ALIAS_TYPE_METAPROGRAMMING
+                            </span>
+                            <span class="target-name">alias: <strong>tile_n</strong></span>
+                        </div>
+                        <div class="header-right">
+                            <span class="confidence-badge badge-vh">90% [VERY_HIGH]</span>
+                            <button class="btn-copy-card-ai" onclick='copySingleAiPrompt("Refactor and optimize the following Mojo architectural finding / kernel pattern:\n- Pattern: alias_type_metaprogramming (Comptime Metaprogramming)\n- Target: tile_n (alias)\n- Location: /Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:6:1\n- Summary: Compile-time 'alias' declarations binding types, dimensions, or constants.\n\nPlease provide an idiomatic Mojo 24.x - 25.x+ high-performance refactoring leveraging SIMD vectorization, explicit ownership (borrowed/inout/owned), and zero-cost compile-time parameters.")' title="Copy AI Refactoring Prompt">🤖 Copy for AI</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="summary-text"><strong>Summary:</strong> Compile-time &#x27;alias&#x27; declarations binding types, dimensions, or constants.</p>
+                        <p class="primary-loc"><strong>Primary Location:</strong> <code>/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:6:1</code></p>
+                        <div class="evidence-section">
+                            <strong>Evidence Trail (1 heuristics):</strong>
+                            <ul class="evidence-list">
+                                <li class="evidence-item" style="border-left-color: #c084fc;"><span class="weight-tag" style="color: #a855f7;">+90%</span> <span class="rule-code">[COMPTIME_ALIAS_DECLARATION]</span> Alias &#x27;tile_n = 32&#x27; defines compile-time type or constant expression <span class="location-tag">📍 /Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:6:1</span></li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <div class="pattern-card" data-pattern="compile_time_branch_specialization" data-category="comptime_metaprogramming" data-target="tiled_matmul_kernel" style="border-left: 4px solid #c084fc;">
+                    <div class="card-header">
+                        <div class="header-left">
+                            <span class="card-index">#18</span>
+                            <span class="category-badge" style="color: #a855f7; background: #581c8744; border: 1px solid #9333ea;">
+                                COMPTIME METAPROGRAMMING
+                            </span>
+                            <span class="pattern-badge" style="color: #a855f7; background: #581c8744; border: 1px solid #9333ea;">
+                                COMPILE_TIME_BRANCH_SPECIALIZATION
+                            </span>
+                            <span class="target-name">fn: <strong>tiled_matmul_kernel</strong></span>
+                        </div>
+                        <div class="header-right">
+                            <span class="confidence-badge badge-vh">95% [VERY_HIGH]</span>
+                            <button class="btn-copy-card-ai" onclick='copySingleAiPrompt("Refactor and optimize the following Mojo architectural finding / kernel pattern:\n- Pattern: compile_time_branch_specialization (Comptime Metaprogramming)\n- Target: tiled_matmul_kernel (fn)\n- Location: /Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:4:1\n- Summary: '@parameter if' compile-time dead code elimination.\n\nPlease provide an idiomatic Mojo 24.x - 25.x+ high-performance refactoring leveraging SIMD vectorization, explicit ownership (borrowed/inout/owned), and zero-cost compile-time parameters.")' title="Copy AI Refactoring Prompt">🤖 Copy for AI</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="summary-text"><strong>Summary:</strong> &#x27;@parameter if&#x27; compile-time dead code elimination.</p>
+                        <p class="primary-loc"><strong>Primary Location:</strong> <code>/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:4:1</code></p>
+                        <div class="evidence-section">
+                            <strong>Evidence Trail (1 heuristics):</strong>
+                            <ul class="evidence-list">
+                                <li class="evidence-item" style="border-left-color: #c084fc;"><span class="weight-tag" style="color: #a855f7;">+95%</span> <span class="rule-code">[COMPTIME_PARAMETER_IF_BRANCH]</span> Function &#x27;tiled_matmul_kernel&#x27; uses @parameter if for zero-cost compile-time branch elimination <span class="location-tag">📍 /Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:4:1</span></li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <div class="pattern-card" data-pattern="scalar_compute_loop" data-category="resilience" data-target="tiled_matmul_kernel" style="border-left: 4px solid #ef4444;">
+                    <div class="card-header">
+                        <div class="header-left">
+                            <span class="card-index">#19</span>
+                            <span class="category-badge" style="color: #f87171; background: #7f1d1d44; border: 1px solid #dc2626;">
+                                SAFETY &amp; HAZARDS
+                            </span>
+                            <span class="pattern-badge" style="color: #f87171; background: #7f1d1d44; border: 1px solid #dc2626;">
+                                SCALAR_COMPUTE_LOOP
+                            </span>
+                            <span class="target-name">fn: <strong>tiled_matmul_kernel</strong></span>
+                        </div>
+                        <div class="header-right">
+                            <span class="confidence-badge badge-vh">88% [VERY_HIGH]</span>
+                            <button class="btn-copy-card-ai" onclick='copySingleAiPrompt("Refactor and optimize the following Mojo architectural finding / kernel pattern:\n- Pattern: scalar_compute_loop (Safety & Hazards)\n- Target: tiled_matmul_kernel (fn)\n- Location: /Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:4:1\n- Summary: Element-by-element scalar loop in numerical algorithm instead of SIMD vectorization.\n\nPlease provide an idiomatic Mojo 24.x - 25.x+ high-performance refactoring leveraging SIMD vectorization, explicit ownership (borrowed/inout/owned), and zero-cost compile-time parameters.")' title="Copy AI Refactoring Prompt">🤖 Copy for AI</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="summary-text"><strong>Summary:</strong> Element-by-element scalar loop in numerical algorithm instead of SIMD vectorization.</p>
+                        <p class="primary-loc"><strong>Primary Location:</strong> <code>/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:4:1</code></p>
+                        <div class="evidence-section">
+                            <strong>Evidence Trail (1 heuristics):</strong>
+                            <ul class="evidence-list">
+                                <li class="evidence-item" style="border-left-color: #ef4444;"><span class="weight-tag" style="color: #f87171;">+88%</span> <span class="rule-code">[HAZARD_SCALAR_COMPUTE_LOOP]</span> Compute kernel &#x27;tiled_matmul_kernel&#x27; executes scalar loop without SIMD vectorization; refactor with &#x27;vectorize&#x27; or SIMD registers <span class="location-tag">📍 /Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:4:1</span></li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <span>✅</span>
+        <span id="toastMsg">AI Context Prompt Copied to Clipboard!</span>
+    </div>
+
+    <!-- AI Prompt Preview Modal -->
+    <div id="promptModal" class="modal-overlay" onclick="closeModalOnOverlay(event)">
+        <div class="modal-box">
+            <div class="modal-header">
+                <div class="modal-title">🤖 AI Architect Context Prompt (Mojo)</div>
+                <button class="modal-close" onclick="closePromptModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p style="font-size: 13px; color: #8b949e; margin-bottom: 12px;">Structured XML/Markdown context for LLMs (Claude, GPT-4, Gemini) including SIMD vectorization, ownership borrow checker, and hardware acceleration analysis.</p>
+                <textarea id="modalPromptArea" class="prompt-textarea" readonly>&lt;codebase_architecture_analysis language=&quot;mojo&quot;&gt;
+  &lt;project path=&quot;/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel&quot; files=&quot;2&quot; detections=&quot;19&quot;&gt;
+    &lt;category_summary&gt;
+      &lt;category name=&quot;MOJO_IDIOMATIC&quot; count=&quot;7&quot; /&gt;
+      &lt;category name=&quot;SIMD_HARDWARE_ACCELERATION&quot; count=&quot;4&quot; /&gt;
+      &lt;category name=&quot;COMPTIME_METAPROGRAMMING&quot; count=&quot;7&quot; /&gt;
+      &lt;category name=&quot;RESILIENCE&quot; count=&quot;1&quot; /&gt;
+    &lt;/category_summary&gt;
+    &lt;mojo_design_patterns_and_simd_acceleration&gt;
+      &lt;pattern type=&quot;struct_value_semantics&quot; target=&quot;TensorShape&quot; category=&quot;mojo_idiomatic&quot; confidence=&quot;95%&quot; location=&quot;/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo:9&quot;&gt;
+        &lt;summary&gt;Value-semantic struct with explicit field memory layout and copy/move lifecycle hooks.&lt;/summary&gt;
+        &lt;evidence&gt;
+          &lt;item rule=&quot;MOJO_VALUE_SEMANTICS_DECORATOR&quot; weight=&quot;+95%&quot;&gt;Struct &#x27;TensorShape&#x27; implements value semantics with @value synthesized constructors&lt;/item&gt;
+        &lt;/evidence&gt;
+      &lt;/pattern&gt;
+      &lt;pattern type=&quot;struct_value_semantics&quot; target=&quot;Tensor&quot; category=&quot;mojo_idiomatic&quot; confidence=&quot;95%&quot; location=&quot;/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo:19&quot;&gt;
+        &lt;summary&gt;Value-semantic struct with explicit field memory layout and copy/move lifecycle hooks.&lt;/summary&gt;
+        &lt;evidence&gt;
+          &lt;item rule=&quot;MOJO_VALUE_SEMANTICS_DECORATOR&quot; weight=&quot;+95%&quot;&gt;Struct &#x27;Tensor&#x27; implements value semantics with @value synthesized constructors&lt;/item&gt;
+        &lt;/evidence&gt;
+      &lt;/pattern&gt;
+      &lt;pattern type=&quot;trait_contract_interface&quot; target=&quot;ComputeLayer&quot; category=&quot;mojo_idiomatic&quot; confidence=&quot;95%&quot; location=&quot;/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo:4&quot;&gt;
+        &lt;summary&gt;Mojo Trait contract enabling static zero-cost polymorphic interface conformance.&lt;/summary&gt;
+        &lt;evidence&gt;
+          &lt;item rule=&quot;MOJO_TRAIT_CONTRACT&quot; weight=&quot;+95%&quot;&gt;Trait &#x27;ComputeLayer&#x27; defines static compile-time interface contract with 1 method(s)&lt;/item&gt;
+        &lt;/evidence&gt;
+      &lt;/pattern&gt;
+      &lt;pattern type=&quot;explicit_ownership_borrow&quot; target=&quot;vectorized_add&quot; category=&quot;mojo_idiomatic&quot; confidence=&quot;90%&quot; location=&quot;/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:1&quot;&gt;
+        &lt;summary&gt;Explicit function argument conventions (&#x27;borrowed&#x27;, &#x27;inout&#x27;, &#x27;owned&#x27;) preventing memory copies.&lt;/summary&gt;
+        &lt;evidence&gt;
+          &lt;item rule=&quot;MOJO_EXPLICIT_OWNERSHIP&quot; weight=&quot;+90%&quot;&gt;Function &#x27;vectorized_add&#x27; enforces explicit memory conventions (a: borrowed, width]: borrowed, b: borrowed)&lt;/item&gt;
+        &lt;/evidence&gt;
+      &lt;/pattern&gt;
+      &lt;pattern type=&quot;explicit_ownership_borrow&quot; target=&quot;tiled_matmul_kernel&quot; category=&quot;mojo_idiomatic&quot; confidence=&quot;90%&quot; location=&quot;/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:4&quot;&gt;
+        &lt;summary&gt;Explicit function argument conventions (&#x27;borrowed&#x27;, &#x27;inout&#x27;, &#x27;owned&#x27;) preventing memory copies.&lt;/summary&gt;
+        &lt;evidence&gt;
+          &lt;item rule=&quot;MOJO_EXPLICIT_OWNERSHIP&quot; weight=&quot;+90%&quot;&gt;Function &#x27;tiled_matmul_kernel&#x27; enforces explicit memory conventions (a: borrowed, b: borrowed, c: inout)&lt;/item&gt;
+        &lt;/evidence&gt;
+      &lt;/pattern&gt;
+      &lt;pattern type=&quot;destruct_raii_lifecycle&quot; target=&quot;Tensor&quot; category=&quot;mojo_idiomatic&quot; confidence=&quot;95%&quot; location=&quot;/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo:23&quot;&gt;
+        &lt;summary&gt;Deterministic resource cleanup via &#x27;__del__&#x27; destructor method.&lt;/summary&gt;
+        &lt;evidence&gt;
+          &lt;item rule=&quot;MOJO_RAII_DESTRUCTOR&quot; weight=&quot;+95%&quot;&gt;Struct &#x27;Tensor&#x27; implements deterministic RAII resource cleanup via __del__&lt;/item&gt;
+        &lt;/evidence&gt;
+      &lt;/pattern&gt;
+      &lt;pattern type=&quot;register_passable_layout&quot; target=&quot;Vec2&quot; category=&quot;mojo_idiomatic&quot; confidence=&quot;95%&quot; location=&quot;/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo:14&quot;&gt;
+        &lt;summary&gt;Struct decorated with &#x27;@register_passable&#x27; or passed directly in machine registers.&lt;/summary&gt;
+        &lt;evidence&gt;
+          &lt;item rule=&quot;MOJO_REGISTER_PASSABLE&quot; weight=&quot;+95%&quot;&gt;Struct &#x27;Vec2&#x27; is decorated with @register_passable for direct zero-overhead register passing&lt;/item&gt;
+        &lt;/evidence&gt;
+      &lt;/pattern&gt;
+      &lt;pattern type=&quot;simd_vectorization_kernel&quot; target=&quot;vectorized_add&quot; category=&quot;simd_hardware_acceleration&quot; confidence=&quot;95%&quot; location=&quot;/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:1&quot;&gt;
+        &lt;summary&gt;SIMD hardware vector registers (AVX-512, ARM Neon) performing multi-element parallel operations.&lt;/summary&gt;
+        &lt;evidence&gt;
+          &lt;item rule=&quot;HARDWARE_SIMD_VECTORIZATION&quot; weight=&quot;+95%&quot;&gt;Function &#x27;vectorized_add&#x27; executes SIMD vector operations across hardware vector registers&lt;/item&gt;
+        &lt;/evidence&gt;
+      &lt;/pattern&gt;
+      &lt;pattern type=&quot;parallelize_multi_core&quot; target=&quot;parallel_tensor_dispatch&quot; category=&quot;simd_hardware_acceleration&quot; confidence=&quot;95%&quot; location=&quot;/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:14&quot;&gt;
+        &lt;summary&gt;Multi-core task distribution using &#x27;parallelize&#x27; and thread pools.&lt;/summary&gt;
+        &lt;evidence&gt;
+          &lt;item rule=&quot;HARDWARE_PARALLELIZE_MULTI_CORE&quot; weight=&quot;+95%&quot;&gt;Function &#x27;parallel_tensor_dispatch&#x27; distributes compute tasks across CPU cores via parallelize&lt;/item&gt;
+        &lt;/evidence&gt;
+      &lt;/pattern&gt;
+      &lt;pattern type=&quot;unsafe_raw_pointer_buffer&quot; target=&quot;Tensor&quot; category=&quot;simd_hardware_acceleration&quot; confidence=&quot;92%&quot; location=&quot;/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo:19&quot;&gt;
+        &lt;summary&gt;Direct memory buffer manipulation via &#x27;UnsafePointer&#x27; or &#x27;DTypePointer&#x27;.&lt;/summary&gt;
+        &lt;evidence&gt;
+          &lt;item rule=&quot;HARDWARE_UNSAFE_POINTER_BUFFER&quot; weight=&quot;+92%&quot;&gt;Struct &#x27;Tensor&#x27; manages direct memory buffer via &#x27;data_ptr: UnsafePointer[Float32]&#x27;&lt;/item&gt;
+        &lt;/evidence&gt;
+      &lt;/pattern&gt;
+      &lt;pattern type=&quot;tensor_tiling_kernel&quot; target=&quot;tiled_matmul_kernel&quot; category=&quot;simd_hardware_acceleration&quot; confidence=&quot;90%&quot; location=&quot;/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:4&quot;&gt;
+        &lt;summary&gt;2D/3D cache-blocked matrix multiplication tiling to fit inside L1/L2 CPU/GPU caches.&lt;/summary&gt;
+        &lt;evidence&gt;
+          &lt;item rule=&quot;HARDWARE_TENSOR_TILING&quot; weight=&quot;+90%&quot;&gt;Function &#x27;tiled_matmul_kernel&#x27; performs cache-blocked tensor tiling to maximize L1/L2 data reuse&lt;/item&gt;
+        &lt;/evidence&gt;
+      &lt;/pattern&gt;
+      &lt;pattern type=&quot;comptime_parameter_specialization&quot; target=&quot;vectorized_add&quot; category=&quot;comptime_metaprogramming&quot; confidence=&quot;95%&quot; location=&quot;/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:1&quot;&gt;
+        &lt;summary&gt;Compile-time parameters (&#x27;[type: DType, width: Int]&#x27;) generating specialized machine code.&lt;/summary&gt;
+        &lt;evidence&gt;
+          &lt;item rule=&quot;COMPTIME_FN_PARAMETERS&quot; weight=&quot;+95%&quot;&gt;Function &#x27;vectorized_add[width: Int]&#x27; parameterizes compile-time hardware types&lt;/item&gt;
+        &lt;/evidence&gt;
+      &lt;/pattern&gt;
+      &lt;pattern type=&quot;comptime_parameter_specialization&quot; target=&quot;tiled_matmul_kernel&quot; category=&quot;comptime_metaprogramming&quot; confidence=&quot;95%&quot; location=&quot;/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:4&quot;&gt;
+        &lt;summary&gt;Compile-time parameters (&#x27;[type: DType, width: Int]&#x27;) generating specialized machine code.&lt;/summary&gt;
+        &lt;evidence&gt;
+          &lt;item rule=&quot;COMPTIME_FN_PARAMETERS&quot; weight=&quot;+95%&quot;&gt;Function &#x27;tiled_matmul_kernel[tile_size: Int]&#x27; parameterizes compile-time hardware types&lt;/item&gt;
+        &lt;/evidence&gt;
+      &lt;/pattern&gt;
+      &lt;pattern type=&quot;alias_type_metaprogramming&quot; target=&quot;DTypeFloat&quot; category=&quot;comptime_metaprogramming&quot; confidence=&quot;90%&quot; location=&quot;/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo:1&quot;&gt;
+        &lt;summary&gt;Compile-time &#x27;alias&#x27; declarations binding types, dimensions, or constants.&lt;/summary&gt;
+        &lt;evidence&gt;
+          &lt;item rule=&quot;COMPTIME_ALIAS_DECLARATION&quot; weight=&quot;+90%&quot;&gt;Alias &#x27;DTypeFloat = DType.float32&#x27; defines compile-time type or constant expression&lt;/item&gt;
+        &lt;/evidence&gt;
+      &lt;/pattern&gt;
+      &lt;pattern type=&quot;alias_type_metaprogramming&quot; target=&quot;SIMDWidth&quot; category=&quot;comptime_metaprogramming&quot; confidence=&quot;90%&quot; location=&quot;/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo:2&quot;&gt;
+        &lt;summary&gt;Compile-time &#x27;alias&#x27; declarations binding types, dimensions, or constants.&lt;/summary&gt;
+        &lt;evidence&gt;
+          &lt;item rule=&quot;COMPTIME_ALIAS_DECLARATION&quot; weight=&quot;+90%&quot;&gt;Alias &#x27;SIMDWidth = 8&#x27; defines compile-time type or constant expression&lt;/item&gt;
+        &lt;/evidence&gt;
+      &lt;/pattern&gt;
+      &lt;pattern type=&quot;alias_type_metaprogramming&quot; target=&quot;tile_m&quot; category=&quot;comptime_metaprogramming&quot; confidence=&quot;90%&quot; location=&quot;/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:5&quot;&gt;
+        &lt;summary&gt;Compile-time &#x27;alias&#x27; declarations binding types, dimensions, or constants.&lt;/summary&gt;
+        &lt;evidence&gt;
+          &lt;item rule=&quot;COMPTIME_ALIAS_DECLARATION&quot; weight=&quot;+90%&quot;&gt;Alias &#x27;tile_m = 32&#x27; defines compile-time type or constant expression&lt;/item&gt;
+        &lt;/evidence&gt;
+      &lt;/pattern&gt;
+      &lt;pattern type=&quot;alias_type_metaprogramming&quot; target=&quot;tile_n&quot; category=&quot;comptime_metaprogramming&quot; confidence=&quot;90%&quot; location=&quot;/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:6&quot;&gt;
+        &lt;summary&gt;Compile-time &#x27;alias&#x27; declarations binding types, dimensions, or constants.&lt;/summary&gt;
+        &lt;evidence&gt;
+          &lt;item rule=&quot;COMPTIME_ALIAS_DECLARATION&quot; weight=&quot;+90%&quot;&gt;Alias &#x27;tile_n = 32&#x27; defines compile-time type or constant expression&lt;/item&gt;
+        &lt;/evidence&gt;
+      &lt;/pattern&gt;
+      &lt;pattern type=&quot;compile_time_branch_specialization&quot; target=&quot;tiled_matmul_kernel&quot; category=&quot;comptime_metaprogramming&quot; confidence=&quot;95%&quot; location=&quot;/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:4&quot;&gt;
+        &lt;summary&gt;&#x27;@parameter if&#x27; compile-time dead code elimination.&lt;/summary&gt;
+        &lt;evidence&gt;
+          &lt;item rule=&quot;COMPTIME_PARAMETER_IF_BRANCH&quot; weight=&quot;+95%&quot;&gt;Function &#x27;tiled_matmul_kernel&#x27; uses @parameter if for zero-cost compile-time branch elimination&lt;/item&gt;
+        &lt;/evidence&gt;
+      &lt;/pattern&gt;
+    &lt;/mojo_design_patterns_and_simd_acceleration&gt;
+    &lt;memory_safety_and_performance_hazards&gt;
+      &lt;hazard rule=&quot;scalar_compute_loop&quot; target=&quot;tiled_matmul_kernel&quot; category=&quot;resilience&quot; confidence=&quot;88%&quot; location=&quot;/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:4&quot;&gt;
+        &lt;risk&gt;Element-by-element scalar loop in numerical algorithm instead of SIMD vectorization.&lt;/risk&gt;
+        &lt;evidence&gt;
+          &lt;item rule=&quot;HAZARD_SCALAR_COMPUTE_LOOP&quot;&gt;Compute kernel &#x27;tiled_matmul_kernel&#x27; executes scalar loop without SIMD vectorization; refactor with &#x27;vectorize&#x27; or SIMD registers&lt;/item&gt;
+        &lt;/evidence&gt;
+      &lt;/hazard&gt;
+    &lt;/memory_safety_and_performance_hazards&gt;
+  &lt;/project&gt;
+&lt;/codebase_architecture_analysis&gt;</textarea>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-view-prompt" onclick="closePromptModal()">Close</button>
+                <button class="btn-ai-context" onclick="copyModalPrompt()">📋 Copy Prompt</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const FULL_LLM_PROMPT = "<codebase_architecture_analysis language=\"mojo\">\n  <project path=\"/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel\" files=\"2\" detections=\"19\">\n    <category_summary>\n      <category name=\"MOJO_IDIOMATIC\" count=\"7\" />\n      <category name=\"SIMD_HARDWARE_ACCELERATION\" count=\"4\" />\n      <category name=\"COMPTIME_METAPROGRAMMING\" count=\"7\" />\n      <category name=\"RESILIENCE\" count=\"1\" />\n    </category_summary>\n    <mojo_design_patterns_and_simd_acceleration>\n      <pattern type=\"struct_value_semantics\" target=\"TensorShape\" category=\"mojo_idiomatic\" confidence=\"95%\" location=\"/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo:9\">\n        <summary>Value-semantic struct with explicit field memory layout and copy/move lifecycle hooks.</summary>\n        <evidence>\n          <item rule=\"MOJO_VALUE_SEMANTICS_DECORATOR\" weight=\"+95%\">Struct 'TensorShape' implements value semantics with @value synthesized constructors</item>\n        </evidence>\n      </pattern>\n      <pattern type=\"struct_value_semantics\" target=\"Tensor\" category=\"mojo_idiomatic\" confidence=\"95%\" location=\"/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo:19\">\n        <summary>Value-semantic struct with explicit field memory layout and copy/move lifecycle hooks.</summary>\n        <evidence>\n          <item rule=\"MOJO_VALUE_SEMANTICS_DECORATOR\" weight=\"+95%\">Struct 'Tensor' implements value semantics with @value synthesized constructors</item>\n        </evidence>\n      </pattern>\n      <pattern type=\"trait_contract_interface\" target=\"ComputeLayer\" category=\"mojo_idiomatic\" confidence=\"95%\" location=\"/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo:4\">\n        <summary>Mojo Trait contract enabling static zero-cost polymorphic interface conformance.</summary>\n        <evidence>\n          <item rule=\"MOJO_TRAIT_CONTRACT\" weight=\"+95%\">Trait 'ComputeLayer' defines static compile-time interface contract with 1 method(s)</item>\n        </evidence>\n      </pattern>\n      <pattern type=\"explicit_ownership_borrow\" target=\"vectorized_add\" category=\"mojo_idiomatic\" confidence=\"90%\" location=\"/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:1\">\n        <summary>Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies.</summary>\n        <evidence>\n          <item rule=\"MOJO_EXPLICIT_OWNERSHIP\" weight=\"+90%\">Function 'vectorized_add' enforces explicit memory conventions (a: borrowed, width]: borrowed, b: borrowed)</item>\n        </evidence>\n      </pattern>\n      <pattern type=\"explicit_ownership_borrow\" target=\"tiled_matmul_kernel\" category=\"mojo_idiomatic\" confidence=\"90%\" location=\"/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:4\">\n        <summary>Explicit function argument conventions ('borrowed', 'inout', 'owned') preventing memory copies.</summary>\n        <evidence>\n          <item rule=\"MOJO_EXPLICIT_OWNERSHIP\" weight=\"+90%\">Function 'tiled_matmul_kernel' enforces explicit memory conventions (a: borrowed, b: borrowed, c: inout)</item>\n        </evidence>\n      </pattern>\n      <pattern type=\"destruct_raii_lifecycle\" target=\"Tensor\" category=\"mojo_idiomatic\" confidence=\"95%\" location=\"/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo:23\">\n        <summary>Deterministic resource cleanup via '__del__' destructor method.</summary>\n        <evidence>\n          <item rule=\"MOJO_RAII_DESTRUCTOR\" weight=\"+95%\">Struct 'Tensor' implements deterministic RAII resource cleanup via __del__</item>\n        </evidence>\n      </pattern>\n      <pattern type=\"register_passable_layout\" target=\"Vec2\" category=\"mojo_idiomatic\" confidence=\"95%\" location=\"/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo:14\">\n        <summary>Struct decorated with '@register_passable' or passed directly in machine registers.</summary>\n        <evidence>\n          <item rule=\"MOJO_REGISTER_PASSABLE\" weight=\"+95%\">Struct 'Vec2' is decorated with @register_passable for direct zero-overhead register passing</item>\n        </evidence>\n      </pattern>\n      <pattern type=\"simd_vectorization_kernel\" target=\"vectorized_add\" category=\"simd_hardware_acceleration\" confidence=\"95%\" location=\"/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:1\">\n        <summary>SIMD hardware vector registers (AVX-512, ARM Neon) performing multi-element parallel operations.</summary>\n        <evidence>\n          <item rule=\"HARDWARE_SIMD_VECTORIZATION\" weight=\"+95%\">Function 'vectorized_add' executes SIMD vector operations across hardware vector registers</item>\n        </evidence>\n      </pattern>\n      <pattern type=\"parallelize_multi_core\" target=\"parallel_tensor_dispatch\" category=\"simd_hardware_acceleration\" confidence=\"95%\" location=\"/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:14\">\n        <summary>Multi-core task distribution using 'parallelize' and thread pools.</summary>\n        <evidence>\n          <item rule=\"HARDWARE_PARALLELIZE_MULTI_CORE\" weight=\"+95%\">Function 'parallel_tensor_dispatch' distributes compute tasks across CPU cores via parallelize</item>\n        </evidence>\n      </pattern>\n      <pattern type=\"unsafe_raw_pointer_buffer\" target=\"Tensor\" category=\"simd_hardware_acceleration\" confidence=\"92%\" location=\"/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo:19\">\n        <summary>Direct memory buffer manipulation via 'UnsafePointer' or 'DTypePointer'.</summary>\n        <evidence>\n          <item rule=\"HARDWARE_UNSAFE_POINTER_BUFFER\" weight=\"+92%\">Struct 'Tensor' manages direct memory buffer via 'data_ptr: UnsafePointer[Float32]'</item>\n        </evidence>\n      </pattern>\n      <pattern type=\"tensor_tiling_kernel\" target=\"tiled_matmul_kernel\" category=\"simd_hardware_acceleration\" confidence=\"90%\" location=\"/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:4\">\n        <summary>2D/3D cache-blocked matrix multiplication tiling to fit inside L1/L2 CPU/GPU caches.</summary>\n        <evidence>\n          <item rule=\"HARDWARE_TENSOR_TILING\" weight=\"+90%\">Function 'tiled_matmul_kernel' performs cache-blocked tensor tiling to maximize L1/L2 data reuse</item>\n        </evidence>\n      </pattern>\n      <pattern type=\"comptime_parameter_specialization\" target=\"vectorized_add\" category=\"comptime_metaprogramming\" confidence=\"95%\" location=\"/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:1\">\n        <summary>Compile-time parameters ('[type: DType, width: Int]') generating specialized machine code.</summary>\n        <evidence>\n          <item rule=\"COMPTIME_FN_PARAMETERS\" weight=\"+95%\">Function 'vectorized_add[width: Int]' parameterizes compile-time hardware types</item>\n        </evidence>\n      </pattern>\n      <pattern type=\"comptime_parameter_specialization\" target=\"tiled_matmul_kernel\" category=\"comptime_metaprogramming\" confidence=\"95%\" location=\"/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:4\">\n        <summary>Compile-time parameters ('[type: DType, width: Int]') generating specialized machine code.</summary>\n        <evidence>\n          <item rule=\"COMPTIME_FN_PARAMETERS\" weight=\"+95%\">Function 'tiled_matmul_kernel[tile_size: Int]' parameterizes compile-time hardware types</item>\n        </evidence>\n      </pattern>\n      <pattern type=\"alias_type_metaprogramming\" target=\"DTypeFloat\" category=\"comptime_metaprogramming\" confidence=\"90%\" location=\"/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo:1\">\n        <summary>Compile-time 'alias' declarations binding types, dimensions, or constants.</summary>\n        <evidence>\n          <item rule=\"COMPTIME_ALIAS_DECLARATION\" weight=\"+90%\">Alias 'DTypeFloat = DType.float32' defines compile-time type or constant expression</item>\n        </evidence>\n      </pattern>\n      <pattern type=\"alias_type_metaprogramming\" target=\"SIMDWidth\" category=\"comptime_metaprogramming\" confidence=\"90%\" location=\"/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/TensorTypes.mojo:2\">\n        <summary>Compile-time 'alias' declarations binding types, dimensions, or constants.</summary>\n        <evidence>\n          <item rule=\"COMPTIME_ALIAS_DECLARATION\" weight=\"+90%\">Alias 'SIMDWidth = 8' defines compile-time type or constant expression</item>\n        </evidence>\n      </pattern>\n      <pattern type=\"alias_type_metaprogramming\" target=\"tile_m\" category=\"comptime_metaprogramming\" confidence=\"90%\" location=\"/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:5\">\n        <summary>Compile-time 'alias' declarations binding types, dimensions, or constants.</summary>\n        <evidence>\n          <item rule=\"COMPTIME_ALIAS_DECLARATION\" weight=\"+90%\">Alias 'tile_m = 32' defines compile-time type or constant expression</item>\n        </evidence>\n      </pattern>\n      <pattern type=\"alias_type_metaprogramming\" target=\"tile_n\" category=\"comptime_metaprogramming\" confidence=\"90%\" location=\"/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:6\">\n        <summary>Compile-time 'alias' declarations binding types, dimensions, or constants.</summary>\n        <evidence>\n          <item rule=\"COMPTIME_ALIAS_DECLARATION\" weight=\"+90%\">Alias 'tile_n = 32' defines compile-time type or constant expression</item>\n        </evidence>\n      </pattern>\n      <pattern type=\"compile_time_branch_specialization\" target=\"tiled_matmul_kernel\" category=\"comptime_metaprogramming\" confidence=\"95%\" location=\"/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:4\">\n        <summary>'@parameter if' compile-time dead code elimination.</summary>\n        <evidence>\n          <item rule=\"COMPTIME_PARAMETER_IF_BRANCH\" weight=\"+95%\">Function 'tiled_matmul_kernel' uses @parameter if for zero-cost compile-time branch elimination</item>\n        </evidence>\n      </pattern>\n    </mojo_design_patterns_and_simd_acceleration>\n    <memory_safety_and_performance_hazards>\n      <hazard rule=\"scalar_compute_loop\" target=\"tiled_matmul_kernel\" category=\"resilience\" confidence=\"88%\" location=\"/Volumes/External/Code/DPX-Mojo/examples/tensor_kernel/ComputeKernels.mojo:4\">\n        <risk>Element-by-element scalar loop in numerical algorithm instead of SIMD vectorization.</risk>\n        <evidence>\n          <item rule=\"HAZARD_SCALAR_COMPUTE_LOOP\">Compute kernel 'tiled_matmul_kernel' executes scalar loop without SIMD vectorization; refactor with 'vectorize' or SIMD registers</item>\n        </evidence>\n      </hazard>\n    </memory_safety_and_performance_hazards>\n  </project>\n</codebase_architecture_analysis>";
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const msgSpan = document.getElementById('toastMsg');
+            msgSpan.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+
+        function copyFullAiContext() {
+            navigator.clipboard.writeText(FULL_LLM_PROMPT).then(() => {
+                showToast("✅ Full AI Context Prompt copied to clipboard!");
+            }).catch(err => {
+                console.error("Failed to copy", err);
+            });
+        }
+
+        function copySingleAiPrompt(promptText) {
+            navigator.clipboard.writeText(promptText).then(() => {
+                showToast("✅ Finding refactoring prompt copied for AI!");
+            }).catch(err => {
+                console.error("Failed to copy", err);
+            });
+        }
+
+        function openPromptModal() {
+            document.getElementById('promptModal').style.display = 'flex';
+        }
+
+        function closePromptModal() {
+            document.getElementById('promptModal').style.display = 'none';
+        }
+
+        function closeModalOnOverlay(e) {
+            if (e.target.id === 'promptModal') {
+                closePromptModal();
+            }
+        }
+
+        function copyModalPrompt() {
+            const textarea = document.getElementById('modalPromptArea');
+            navigator.clipboard.writeText(textarea.value).then(() => {
+                showToast("✅ Prompt copied to clipboard!");
+                closePromptModal();
+            });
+        }
+
+        const searchInput = document.getElementById('searchInput');
+        const cards = document.querySelectorAll('.pattern-card');
+        const filterBtns = document.querySelectorAll('.cat-filter-btn');
+        let selectedCategory = 'all';
+
+        function filterCards() {
+            const query = searchInput.value.toLowerCase();
+            cards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                const pattern = card.dataset.pattern || '';
+                const category = card.dataset.category || '';
+                const target = card.dataset.target || '';
+
+                const matchesCategory = (selectedCategory === 'all' || category === selectedCategory);
+                const matchesSearch = (text.includes(query) || pattern.includes(query) || category.includes(query) || target.includes(query));
+
+                if (matchesCategory && matchesSearch) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        searchInput.addEventListener('input', filterCards);
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                selectedCategory = btn.dataset.filter;
+                filterBtns.forEach(b => b.style.outline = 'none');
+                btn.style.outline = '2px solid #ff4500';
+                filterCards();
+            });
+        });
+    </script>
+</body>
+</html>

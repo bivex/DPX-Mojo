@@ -51,7 +51,7 @@ def test_accidental_copy_overhead() -> None:
         var b: Int
         var c: Int
 
-    fn process_matrix(m: LargeMatrix):
+    fn process_matrix(owned m: LargeMatrix):
         pass
     """
     parser = NativeMojoParserAdapter()

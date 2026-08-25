@@ -15,10 +15,9 @@ from pattern_detector.domain.value_objects import PatternType
 
 def test_monolithic_struct_srp() -> None:
     fields_code = "\n".join(f"    var field_{i}: Float32" for i in range(12))
-    code = f"""
-    struct BigDataStruct:
+    code = f"""struct BigDataStruct:
 {fields_code}
-    """
+"""
     parser = NativeMojoParserAdapter()
     model = parser.parse_codebase([("big.mojo", code)])
 
@@ -31,10 +30,9 @@ def test_monolithic_struct_srp() -> None:
 
 def test_fat_trait_isp() -> None:
     methods_code = "\n".join(f"    fn method_{i}(self) -> None: ..." for i in range(8))
-    code = f"""
-    trait MegaTrait:
+    code = f"""trait MegaTrait:
 {methods_code}
-    """
+"""
     parser = NativeMojoParserAdapter()
     model = parser.parse_codebase([("mega.mojo", code)])
 
@@ -69,10 +67,9 @@ def test_manual_type_switch_ocp() -> None:
 
 def test_kiss_cyclomatic_complexity() -> None:
     branches = "\n".join(f"    if x == {i}: print({i})" for i in range(10))
-    code = f"""
-    fn complex_decision(x: Int):
+    code = f"""fn complex_decision(x: Int):
 {branches}
-    """
+"""
     parser = NativeMojoParserAdapter()
     model = parser.parse_codebase([("complex.mojo", code)])
 
